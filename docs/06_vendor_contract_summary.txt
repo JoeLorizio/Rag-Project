@@ -1,0 +1,404 @@
+NEXUS TECHNOLOGY SOLUTIONS
+VENDOR AND CONTRACT SUMMARY
+Document Version: 2026.1
+Report Date: January 10, 2026
+Owner: Patricia Williams, VP Finance and Operations
+Distribution: Executive Team, Finance, Procurement
+Classification: Confidential — Internal Use Only
+
+================================================================================
+EXECUTIVE SUMMARY
+================================================================================
+
+Nexus Technology Solutions maintains 64 active vendor relationships. Total
+annual vendor spend for FY2025 was $4.1 million, comprising approximately
+$2.5 million in software and cloud services and $1.6 million in hardware,
+support contracts, and professional services.
+
+The 10 largest vendors by annual spend represent 71% of total vendor spend.
+Eleven contracts are scheduled for renewal in the next 6 months. Three vendor
+relationships are under strategic review.
+
+================================================================================
+SECTION 1: CRITICAL VENDOR CONTRACTS
+================================================================================
+
+The following vendors are classified as critical due to their impact on
+service delivery, customer commitments, or security posture. Any disruption
+from a critical vendor requires immediate escalation to the relevant VP.
+
+--------------------------------------------------------------------------------
+VENDOR: MICROSOFT
+--------------------------------------------------------------------------------
+Relationship Type: Technology Partner / Cloud Provider
+Classification: Critical
+Primary Contact: Jennifer Novak (Microsoft AE), jennifer.novak@microsoft.com
+Nexus Internal Owner: Marcus Chen (VP Infrastructure)
+
+Contracts in Place:
+
+1. MICROSOFT ENTERPRISE AGREEMENT (EA)
+   Products: Microsoft 365 E5 (412 licenses), Azure commitment, Defender,
+             Purview, Sentinel
+   Annual Value: $2.1 million (includes Azure consumption)
+   Azure committed spend: $1.2 million/year (3-year commitment)
+   M365 annual: $320,000 (412 users x $64.90/user/month)
+   Term: 3-year EA, expires March 31, 2027
+   Renewal Contact: Jennifer Novak
+   Notes: Azure commitment is draw-down. FY2025 actual Azure spend was
+   $1.84M against $1.2M committed — overage paid at on-demand rates.
+   EA renewal negotiation should begin September 2026 to allow time for
+   competitive evaluation and negotiation.
+
+   Microsoft Partner Status: Microsoft Solutions Partner (Infrastructure)
+   Partner benefits: Technical presales support, NFR licenses (32 seats),
+   partner advisory hours (40 hours/year), co-sell eligibility
+
+2. MICROSOFT UNIFIED SUPPORT
+   Coverage: All Microsoft products, 24/7 critical support
+   Annual Value: $84,000
+   Term: Annual, auto-renews April 1
+   Next renewal: April 1, 2026
+   Note: Evaluate whether Azure Expert MSP program is accessible (would
+   reduce Unified cost) — Maria Santos to investigate by February 2026
+
+--------------------------------------------------------------------------------
+VENDOR: DELL TECHNOLOGIES
+--------------------------------------------------------------------------------
+Relationship Type: Hardware Partner / Support Provider
+Classification: Critical
+Primary Contact: Carlos Mendez (Dell Account Exec), carlos.mendez@dell.com
+Nexus Internal Owner: Jake Thompson
+
+Contracts in Place:
+
+1. DELL EMDM PROSUPPORT PLUS (Infrastructure)
+   Coverage: All Dell PowerEdge servers (28 servers), PowerStore array,
+             Data Domain backup appliance
+   Annual Value: $186,000
+   Term: Annual, expires June 30, 2026
+   Response SLA: 4-hour parts and labor for all covered systems
+   Next Renewal: June 2026
+   Notes: Renewal quote expected by April 2026. Last renewal was 8% increase;
+   budget for 10% increase in FY2026 planning.
+
+2. DELL HARDWARE PURCHASE (FY2026 — DC-CHI Expansion)
+   Items: 4x PowerEdge R750 (2x Intel Xeon Gold 6338, 1.5TB RAM, 25GbE)
+   Purchase Value: $280,000
+   PO Date: January 8, 2026
+   Expected Delivery: Late March 2026
+   Warranty: ProSupport Plus included for 3 years
+
+3. DELL APEX DATA STORAGE EVALUATION
+   Status: Pilot proposal received Q4 2025; under evaluation
+   Potential: Replace PowerStore expansion shelf with Dell APEX subscription
+              storage (OpEx vs CapEx model)
+   Decision Required: Q3 2026 before DC-CHI storage capacity constraint
+
+--------------------------------------------------------------------------------
+VENDOR: VMWARE / BROADCOM
+--------------------------------------------------------------------------------
+Relationship Type: Hypervisor Platform
+Classification: Critical
+Primary Contact: Ashley Torres (Broadcom Partner Desk)
+Nexus Internal Owner: Marcus Chen
+STATUS: UNDER STRATEGIC REVIEW
+
+Current Contract:
+   Products: vSphere 8 Enterprise Plus, vSAN, vCenter Server, NSX-T
+   Annual Value: $248,000
+   Term: Expires September 30, 2026
+   License count: 28 hosts, 2 vCenter, vSAN cluster (12 hosts)
+
+Strategic Review Notes:
+Broadcom's acquisition of VMware and subsequent licensing model changes have
+significantly increased Nexus' per-host costs. At contract renewal Broadcom
+is requiring migration to the VMware Cloud Foundation (VCF) subscription model.
+Estimated renewal cost under VCF: $380,000-420,000/year (52-69% increase).
+
+Alternatives under active evaluation:
+1. Nutanix AHV — Marcus Chen leading evaluation, POC in DC-CHI dev cluster
+2. Microsoft Hyper-V + SCVMM — Less feature-rich but zero additional license
+   cost under existing EA
+3. Proxmox VE — Open source, significant migration risk, under review
+4. Maintain VMware, negotiate VCF pricing — may achieve 20-25% below list
+
+Decision Required: By June 2026 to allow migration time before September
+contract expiration. Budget impact: $80,000-$172,000 annual increase depending
+on decision. This is a significant financial decision requiring Board awareness.
+
+--------------------------------------------------------------------------------
+VENDOR: PALO ALTO NETWORKS
+--------------------------------------------------------------------------------
+Relationship Type: Network Security Platform
+Classification: Critical
+Primary Contact: David Chen (Palo Alto AE), david.chen@paloaltonetworks.com
+Nexus Internal Owner: Sandra Kim / Derek Williams
+
+Contracts in Place:
+
+1. HARDWARE + SUBSCRIPTION BUNDLE (On-premises NGFWs)
+   Products: PA-5250 HA pair (DC-CHI), PA-3260 (DC-DAL),
+             Threat Prevention, URL Filtering, WildFire, DNS Security,
+             Advanced Threat Prevention, GlobalProtect Gateway
+   Annual Value: $168,000
+   Term: 3-year subscription, expires December 31, 2026
+   Hardware is owned (purchased 2022, 5-year EOL 2027)
+   Next Renewal: December 2026 — begin discussion Q3 2026
+   Note: Evaluate Prisma SASE as potential replacement at renewal
+
+2. PANORAMA (Centralized Management)
+   Annual Value: $18,000
+   Term: Aligned with above, expires December 31, 2026
+
+3. PRISMA ACCESS (ZTNA)
+   Products: Prisma Access for Applications (ZTNA)
+   Current Users: 50 developer licenses (pilot)
+   Annual Value: $24,000 (pilot)
+   Term: Annual, expires March 31, 2026
+   Next Renewal: March 2026
+   Note: If SASE evaluation (planned H2 2026) proceeds, this may expand
+   significantly to replace GlobalProtect VPN. Budget impact TBD.
+
+Partner Status: Palo Alto MSSP partner (NextWave Ignite Partner Program)
+Partner benefits: NFR units for lab, deal registration, co-selling
+
+--------------------------------------------------------------------------------
+VENDOR: VEEAM SOFTWARE
+--------------------------------------------------------------------------------
+Relationship Type: Backup and Data Protection
+Classification: Critical
+Primary Contact: Rachel Simmons (Veeam AE)
+Nexus Internal Owner: Jake Thompson
+
+1. VEEAM UNIVERSAL LICENSE
+   Products: Veeam Backup & Replication 12 (Universal License)
+             Includes: VM backup, NAS backup, physical agent,
+             Veeam Cloud Connect provider, immutable backups
+   License Count: 750 instances (covers all VMs and physical servers)
+   Annual Value: $112,000
+   Term: Annual, expires August 31, 2026
+   Next Renewal: August 2026
+   Note: Evaluate VUL vs. VBR+ Veeam Data Cloud bundle at renewal.
+   Veeam pricing increased 22% at last renewal; negotiate multi-year.
+
+--------------------------------------------------------------------------------
+VENDOR: CYBERARK
+--------------------------------------------------------------------------------
+Relationship Type: Privileged Access Management
+Classification: Critical
+Primary Contact: Michelle Park (CyberArk AE)
+Nexus Internal Owner: Sandra Kim
+
+1. CYBERARK IDENTITY SECURITY PLATFORM
+   Products: CyberArk Privilege Cloud (SaaS), Endpoint Privilege Manager,
+             Conjur Cloud (secrets management for DevOps)
+   License Count: 850 managed accounts, 340 endpoint licenses
+   Annual Value: $148,000
+   Term: 3-year agreement, expires June 30, 2027
+   Next Renewal: June 2027 (no action needed this year)
+
+--------------------------------------------------------------------------------
+VENDOR: CISCO SYSTEMS
+--------------------------------------------------------------------------------
+Relationship Type: Networking Hardware and Software
+Classification: Critical
+Primary Contact: Kim Anderson (Cisco AE), kim.anderson@cisco.com
+Nexus Internal Owner: Derek Williams
+
+1. CISCO SMARTNET TOTAL CARE (Network Infrastructure)
+   Coverage: All Cisco routers, switches, ASR platforms, ISR platforms
+   Asset Count: Approximately 120 Cisco devices across all sites
+   Annual Value: $94,000
+   Term: Annual, expires December 31, 2026
+   Note: Two Cisco Nexus 3172 switches are approaching end of software
+   maintenance (March 2026). Need upgrade path decision by February 2026.
+   Estimated replacement cost: $24,000.
+
+2. CISCO SD-WAN (VIPTELA) SUBSCRIPTION
+   Products: Cisco SD-WAN Advantage (vEdge at DC-CHI, DC-DAL)
+   Annual Value: $42,000
+   Term: Annual, expires June 30, 2026
+   Next Renewal: June 2026
+   Note: AT&T MPLS contract aligns with SD-WAN renewal; negotiate jointly.
+
+3. CISCO WEBEX (COLLABORATION)
+   Products: Webex Meetings + Webex Calling (340 users)
+   Annual Value: $38,000
+   Term: Annual, expires March 31, 2026
+   Next Renewal: March 2026 — evaluate vs Microsoft Teams Phone
+   Note: Significant overlap with Microsoft Teams now widely adopted.
+   Potential to consolidate on Teams Phone and eliminate Webex Calling
+   ($28,000 annual savings possible). Derek Williams and Lauren Mitchell
+   to complete analysis by February 15, 2026.
+
+--------------------------------------------------------------------------------
+VENDOR: CROWDSTRIKE
+--------------------------------------------------------------------------------
+Relationship Type: Endpoint Detection and Response
+Classification: Critical
+Primary Contact: Thomas Burke (CrowdStrike AE)
+Nexus Internal Owner: Sandra Kim
+
+1. CROWDSTRIKE FALCON COMPLETE MDR
+   Products: Falcon Prevent (AV), Falcon Insight (EDR), Falcon Identity,
+             Falcon Device Control, Falcon Complete (24/7 managed detection)
+   License Count: 420 endpoints (340 employees + 80 servers)
+   Annual Value: $186,000
+   Term: 2-year agreement, expires November 30, 2026
+   Next Renewal: November 2026 — begin Q3 2026
+   Note: Evaluate adding Falcon Exposure Management (EASM) at renewal.
+   Current Tenable contract expires same period — consider consolidation.
+
+--------------------------------------------------------------------------------
+VENDOR: TENABLE
+--------------------------------------------------------------------------------
+Relationship Type: Vulnerability Management
+Classification: High (non-critical)
+Primary Contact: Lisa Young (Tenable AE)
+Nexus Internal Owner: Sandra Kim
+
+1. TENABLE.IO VULNERABILITY MANAGEMENT
+   Products: Tenable.io (cloud-based VM), Nessus Scanners (8 on-prem)
+   Asset Count: 2,400 licensed assets
+   Annual Value: $68,000
+   Term: Annual, expires September 30, 2026
+   Next Renewal: September 2026
+   Note: CrowdStrike renewal (November 2026) may enable consolidation
+   onto CrowdStrike Falcon Exposure Management, eliminating Tenable.
+   Evaluate by Q3 2026.
+
+--------------------------------------------------------------------------------
+VENDOR: AT&T BUSINESS
+--------------------------------------------------------------------------------
+Relationship Type: WAN / Connectivity Provider
+Classification: Critical
+Primary Contact: Robert Simmons (AT&T AE), +1-214-555-0140
+Nexus Internal Owner: Derek Williams
+
+1. AT&T MPLS WAN SERVICE
+   Circuits: DC-CHI 10Gbps primary MPLS, DC-DAL 1Gbps MPLS
+   Annual Value: $184,000
+   Term: 3-year contract, expires June 30, 2027
+   Note: SLA for MPLS circuit restoration: 4 hours for primary, 8 hours
+   for secondary. Nexus has exercised SLA credits twice in FY2025 totaling
+   $4,200.
+
+2. AT&T DEDICATED INTERNET ACCESS (DC-CHI)
+   Circuit: 10Gbps DIA, DC-CHI
+   Annual Value: $36,000
+   Term: Annual, expires December 31, 2026
+   Next Renewal: December 2026
+
+================================================================================
+SECTION 2: ADDITIONAL VENDOR SUMMARY
+================================================================================
+
+SOFTWARE AND SAAS VENDORS (non-critical):
+
+ServiceNow: ITSM, GRC, ITOM — $148,000/year — expires September 30, 2026
+Atlassian (Jira + Confluence): Engineering tooling — $28,000/year — annual
+PagerDuty: On-call management — $18,000/year — annual, expires February 2026
+Datadog: APM and log management (dev use) — $42,000/year — annual
+1Password Business: Password management (340 users) — $8,400/year — annual
+KnowBe4: Security awareness training — $22,000/year — expires July 2026
+GitHub Enterprise: Source code management — $48,000/year — annual
+Azure DevOps: CI/CD (bundled in Microsoft EA)
+Workday: HR and Finance — $148,000/year — 5-year term, expires 2028
+ADP Workforce Now: Payroll — $42,000/year — annual
+Concur: Travel and expense — $18,000/year — annual
+Expensify: Expense reporting — $12,000/year — annual
+DocuSign: eSignature — $8,400/year — annual
+Zoom: Video conferencing (100 licenses) — $14,400/year — annual, March 2026
+Slack: Team communication — $28,800/year — annual, October 2026
+Okta: Customer-facing SSO for SaaS platform — $38,000/year — annual
+Snyk: Application security (SAST/SCA) — $24,000/year — annual
+SonarQube: Code quality — $18,000/year — annual
+Hashicorp Vault (now IBM): Secrets management — $22,000/year — annual
+
+================================================================================
+SECTION 3: CONTRACTS EXPIRING IN NEXT 6 MONTHS
+================================================================================
+
+IMMEDIATE ACTION REQUIRED (expiring within 90 days):
+
+1. PALO ALTO PRISMA ACCESS (ZTNA pilot) — March 31, 2026
+   Decision: Expand, reduce, or cancel based on ZTNA roadmap
+   Owner: Sandra Kim / Derek Williams
+   Budget Impact: Expansion could add $80,000-$200,000/year
+
+2. CISCO WEBEX — March 31, 2026
+   Decision: Renew or migrate to Teams Phone
+   Owner: Lauren Mitchell / Derek Williams
+   Potential savings: $28,000/year if consolidated to Teams
+
+3. PAGERDUTY — February 28, 2026
+   Action: Straightforward renewal; negotiate multi-year for discount
+   Owner: Lauren Mitchell
+   Expected cost: $18,000-20,000/year
+
+ACTION REQUIRED (expiring 90-180 days):
+
+4. DELL PROSUPPORT PLUS — June 30, 2026
+   Action: Renewal quote expected April; budget 10% increase
+   Owner: Jake Thompson
+
+5. CISCO SD-WAN — June 30, 2026
+   Action: Negotiate jointly with AT&T MPLS (July 2027 expiry)
+   Consider: SD-WAN platform alternatives (Versa, VMware VeloCloud)
+   Owner: Derek Williams
+
+6. AT&T DIA (DC-CHI) — December 31, 2026
+   Action: Benchmark against Comcast Business, Zayo
+   Owner: Derek Williams
+
+7. VEEAM UNIVERSAL LICENSE — August 31, 2026
+   Action: Evaluate VCF bundle, negotiate multi-year deal
+   Owner: Jake Thompson
+
+================================================================================
+SECTION 4: VENDOR RELATIONSHIPS UNDER REVIEW
+================================================================================
+
+1. VMWARE / BROADCOM — Strategic platform review
+   See critical vendor section. Decision deadline: June 2026.
+   Risk: $80,000-$172,000 annual cost increase or significant migration project
+
+2. WEBEX — Consolidation evaluation
+   Possible elimination in favor of Teams Phone
+   Decision: By February 15, 2026
+
+3. TENABLE — Possible consolidation with CrowdStrike
+   Decision: Q3 2026 aligned with CrowdStrike renewal
+
+================================================================================
+SECTION 5: VENDOR PAYMENT SUMMARY
+================================================================================
+
+FY2025 Vendor Spend Summary:
+Software Licenses and SaaS: $1,420,000 (35%)
+Cloud Services (Azure, AWS): $2,460,000 (60% — includes consumption)
+Professional Services: $128,000 (3%)
+Hardware and Maintenance: $92,000 (2%)
+Total: $4,100,000
+
+Note: Cloud services line reflects actual Azure consumption ($1,840,000)
+plus AWS ($620,000). Azure consumption exceeded EA commitment by $640,000.
+
+FY2026 Vendor Budget (preliminary):
+Total approved: $4,600,000
+Increase from FY2025: 12% ($500,000)
+Largest increases:
+- Azure consumption growth (estimated 18%): +$330,000
+- VMware renewal risk (range $80,000-$172,000 increase)
+- New headcount-driven license growth (approximately $80,000)
+- Hardware maintenance on new compute nodes: $42,000
+
+================================================================================
+END OF DOCUMENT
+================================================================================
+Document Owner: Patricia Williams, VP Finance and Operations
+Review Cycle: Quarterly
+Next Update: April 2026
+Procurement questions: procurement@nexustech.io
+================================================================================

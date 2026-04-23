@@ -1,0 +1,513 @@
+NEXUS TECHNOLOGY SOLUTIONS
+INCIDENT RESPONSE RUNBOOK
+Document Version: 2.8
+Last Updated: December 2025
+Owner: NOC and Infrastructure Team
+Classification: Internal Use Only — Restricted
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+1. Purpose and Scope
+2. Incident Severity Definitions
+3. Incident Response Team Structure
+4. On-Call Schedule and Escalation Contacts
+5. Incident Response Procedures by Severity
+6. Communication Templates
+7. Runbooks by System Type
+8. Post-Incident Review Process
+9. Customer SLA Commitments
+
+================================================================================
+1. PURPOSE AND SCOPE
+================================================================================
+
+This runbook defines the standard operating procedures for identifying,
+classifying, escalating, and resolving incidents at Nexus Technology Solutions.
+It applies to all production systems managed by the Infrastructure, Cloud, and
+NOC teams, including customer-managed services.
+
+All engineers are expected to be familiar with this document before joining an
+on-call rotation. New hires must complete the Incident Response training module
+in Workday Learning within 30 days of their start date.
+
+This document should be treated as a living document. Any engineer may propose
+changes via pull request to the internal GitLab repository (infra/runbooks).
+Changes require approval from the Infrastructure Lead and NOC Manager.
+
+================================================================================
+2. INCIDENT SEVERITY DEFINITIONS
+================================================================================
+
+P1 — CRITICAL
+--------------
+Definition: Complete or near-complete loss of service for production systems
+affecting customers or posing a risk of data loss or security breach.
+
+Examples:
+- Customer portal completely unavailable
+- API gateway returning 5xx errors for more than 5% of requests for >5 minutes
+- Database cluster unavailable or at risk of data loss
+- Security breach confirmed or strongly suspected
+- Ransomware or malware detected on production systems
+- Core network failure affecting multiple customers
+
+Response SLA: Acknowledge within 15 minutes, first status update within
+30 minutes, resolution or workaround within 4 hours.
+
+P2 — HIGH
+----------
+Definition: Partial service degradation affecting a subset of customers or
+functionality, or a condition likely to escalate to P1 without intervention.
+
+Examples:
+- API latency above 3x normal baseline for >10 minutes
+- Single-customer portal outage
+- Backup job failures for more than 2 consecutive days
+- Disk utilization above 85% on production systems
+- Certificate expiration within 14 days on customer-facing endpoint
+- Single node failure in a redundant cluster
+
+Response SLA: Acknowledge within 1 hour, resolution or escalation within
+8 hours during business hours, 12 hours off-hours.
+
+P3 — MEDIUM
+-----------
+Definition: Non-customer-impacting issues, warning-level alerts, or
+degraded performance not affecting SLAs.
+
+Examples:
+- Disk utilization 75-85%
+- Non-production environment outages
+- Single failed monitoring check with successful retry
+- Minor configuration drift detected
+
+Response SLA: Acknowledge within 4 business hours, resolve within 5
+business days.
+
+P4 — LOW
+---------
+Definition: Informational alerts, minor issues, improvement opportunities.
+
+Response SLA: Logged and triaged at next team standup.
+
+================================================================================
+3. INCIDENT RESPONSE TEAM STRUCTURE
+================================================================================
+
+INCIDENT COMMANDER (IC)
+------------------------
+Role: Overall ownership of the incident response. Declares incident severity,
+coordinates resources, drives communication, and owns customer updates.
+
+Qualifications: Senior engineer or above, completed IC certification training.
+Rotating on-call: Weekly rotation among 8 qualified ICs.
+
+Current qualified ICs (as of January 2026):
+1. Marcus Chen (VP Infrastructure)
+2. Maria Santos (Cloud Platform Lead)
+3. Jake Thompson (Sr. Infrastructure Engineer)
+4. Derek Williams (Network Security Engineer)
+5. Sandra Kim (Security Lead)
+6. Priya Patel (Sr. Cloud Engineer)
+7. James Okafor (Database Lead)
+8. Lauren Mitchell (NOC Manager)
+
+TECHNICAL LEAD (TL)
+--------------------
+Role: Owns the technical investigation and resolution. Works hands-on with
+affected systems. Reports status to IC every 15 minutes during P1 incidents.
+
+COMMUNICATIONS LEAD (CL)
+-------------------------
+Role: Owns customer and internal communication. Updates Statuspage, sends
+customer emails, coordinates with account management team.
+
+During P1 incidents outside business hours, the IC initially takes the CL role
+until a CL can be paged in (target: within 30 minutes).
+
+NOC SUPPORT
+-----------
+Role: Monitors dashboards, captures screenshots/logs, handles secondary
+alerting, coordinates vendor calls.
+
+NOC staffing:
+- Business hours (7am-7pm CT, M-F): 2 NOC analysts on site
+- Evenings (7pm-11pm CT): 1 NOC analyst (remote)
+- Overnight and weekends: On-call NOC (PagerDuty), response SLA 30 minutes
+
+================================================================================
+4. ON-CALL SCHEDULE AND ESCALATION CONTACTS
+================================================================================
+
+4.1 PRIMARY ON-CALL ROTATION
+------------------------------
+On-call schedule is managed in PagerDuty under the "Infrastructure Primary"
+schedule. The weekly rotation begins Monday at 8:00am CT.
+
+Current 8-week rotation order:
+Week 1: Jake Thompson — jake.thompson@nexustech.io / +1-312-555-0147
+Week 2: Priya Patel — priya.patel@nexustech.io / +1-312-555-0183
+Week 3: Derek Williams — derek.williams@nexustech.io / +1-312-555-0219
+Week 4: James Okafor — james.okafor@nexustech.io / +1-312-555-0261
+Week 5: Maria Santos — maria.santos@nexustech.io / +1-312-555-0308
+Week 6: Sandra Kim — sandra.kim@nexustech.io / +1-312-555-0342
+Week 7: Lauren Mitchell — lauren.mitchell@nexustech.io / +1-312-555-0374
+Week 8: Jake Thompson (repeat — team expansion planned Q2 2026)
+
+4.2 ESCALATION PATH
+--------------------
+Level 1 (0-15 min): Primary on-call engineer responds via PagerDuty
+Level 2 (15-30 min): Secondary on-call paged if no acknowledgment
+Level 3 (30-45 min): IC paged for P1 if primary has not resolved or escalated
+Level 4 (45-60 min): VP Infrastructure (Marcus Chen) notified for all P1s
+Level 5 (60+ min): CEO (Robert Hargrove) notified if customer SLA breach
+                    is imminent or confirmed
+
+4.3 AFTER-HOURS ESCALATION CONTACTS
+--------------------------------------
+NOC After-Hours Hotline: +1-312-555-0100 (24/7, staffed)
+PagerDuty Service: nexustech.pagerduty.com
+Slack Workspace: nexustech.slack.com — #incidents channel
+
+Vendor Emergency Contacts:
+- VMware/Broadcom TAC: 1-877-486-9273 (24/7), SR priority: Business Critical
+- Dell EMC Support: 1-800-945-3355, support tag: NXT-PROD-2024
+- Palo Alto Networks PANW TAC: 1-866-898-9087 (24/7)
+- Cisco TAC: 1-800-553-2447, contract: CON-SNTE-NEXUS24
+- Azure Support: portal.azure.com, support plan: Unified (24/7 Sev A/B)
+- PagerDuty Support: +1-415-990-9470
+
+4.4 CUSTOMER CONTACTS FOR P1 INCIDENTS
+----------------------------------------
+Account Management escalation contacts (for customer notification):
+- Director of Account Management: Rebecca Torres, +1-312-555-0412
+- VP of Customer Success: Aaron Chang, +1-312-555-0455
+- Customer Success Manager on-call: Managed via separate CS PagerDuty rotation
+
+================================================================================
+5. INCIDENT RESPONSE PROCEDURES BY SEVERITY
+================================================================================
+
+5.1 P1 INCIDENT PROCEDURE
+--------------------------
+
+STEP 1: DETECTION AND ACKNOWLEDGMENT (Target: 0-15 minutes)
+- PagerDuty alert fires, primary on-call acknowledges
+- Verify the alert is genuine (not a flapping monitor or false positive)
+- If genuine P1 confirmed, immediately:
+  a. Acknowledge PagerDuty alert
+  b. Join #incidents Slack channel and announce: "I am investigating [alert
+     name], acknowledged at [time]"
+  c. Create incident ticket in ServiceNow (template: P1-TEMPLATE-001)
+  d. Begin collecting initial data (see Section 7 for system-specific runbooks)
+
+STEP 2: INITIAL ASSESSMENT (Target: 15-30 minutes)
+- Determine blast radius: how many customers/services affected?
+- Identify likely root cause area (network, compute, application, database)
+- Page additional resources if needed (TL, IC, database lead, etc.)
+- Post first status update to Statuspage.io (use template in Section 6)
+
+STEP 3: INVESTIGATION AND MITIGATION (Target: 30-240 minutes)
+- Technical Lead owns investigation
+- Document all commands run, configuration changes, findings in ServiceNow
+- Consider rollback as a mitigation if recent deployment is suspected
+- Communicate status to IC every 15 minutes
+- IC posts customer updates to Statuspage every 30 minutes
+
+STEP 4: RESOLUTION
+- Confirm service restoration via monitoring dashboards
+- Verify customer-impacting symptoms resolved
+- Post "resolved" update to Statuspage
+- Send resolution email to affected customers (template in Section 6)
+- Notify account management team
+
+STEP 5: POST-INCIDENT HANDOFF
+- Write initial incident summary in ServiceNow (due within 2 hours)
+- Schedule post-incident review (PIR) within 5 business days
+- Hand off to next on-call if incident spans shift change
+
+5.2 P2 INCIDENT PROCEDURE
+--------------------------
+
+1. Acknowledge PagerDuty alert within 1 hour
+2. Post in #alerts Slack channel: "Investigating [alert name] — [engineer name]"
+3. Create ServiceNow ticket (P2-TEMPLATE-001)
+4. Investigate and resolve or escalate to P1 if condition worsens
+5. Document resolution in ServiceNow
+6. No customer communication required unless SLA is at risk
+
+5.3 P3 AND P4 INCIDENT PROCEDURE
+----------------------------------
+P3: Create ServiceNow ticket, assign to appropriate team queue, resolve within
+5 business days. Discuss at next team standup.
+
+P4: Log in ServiceNow, tag as P4, triage at next standup, no response SLA.
+
+================================================================================
+6. COMMUNICATION TEMPLATES
+================================================================================
+
+6.1 STATUSPAGE INITIAL UPDATE (post within 30 minutes of P1 declaration)
+--------------------------------------------------------------------------
+Incident Title: [Brief description of impact]
+
+Status: Investigating
+
+We are currently investigating an issue affecting [service name]. Customers
+may experience [describe symptom: unavailability / degraded performance /
+increased latency]. Our team is actively working to identify the root cause.
+
+Next update: Within 30 minutes.
+
+— Nexus Technology Solutions Operations Team
+
+6.2 STATUSPAGE PROGRESS UPDATE (post every 30 minutes during P1)
+-----------------------------------------------------------------
+Incident Title: [Same as initial]
+
+Status: Identified / Monitoring / [Updated status]
+
+Update: Our team has identified [root cause summary] as the cause of this
+incident. We are currently [mitigation action in progress]. We expect to
+have [restored service / deployed fix / completed investigation] by
+approximately [time estimate].
+
+Next update: Within 30 minutes.
+
+6.3 STATUSPAGE RESOLUTION UPDATE
+----------------------------------
+Incident Title: [Same as initial]
+
+Status: Resolved
+
+We are pleased to confirm that [service name] has been fully restored as of
+[resolution time CT]. The incident was caused by [brief root cause]. We have
+completed a full investigation and have taken steps to prevent recurrence.
+
+We sincerely apologize for the inconvenience this may have caused. A full
+post-incident report will be available within 5 business days.
+
+6.4 CUSTOMER EMAIL TEMPLATE (for SLA-breaching incidents)
+---------------------------------------------------------
+Subject: [RESOLVED] Service Incident — [Service Name] — [Date]
+
+Dear [Customer Name],
+
+We are writing to inform you that Nexus Technology Solutions experienced a
+service incident affecting [service name] from [start time] to [end time] CT
+on [date].
+
+Impact: [Describe specific customer impact]
+Duration: [X hours Y minutes]
+Root Cause: [Brief root cause statement]
+Resolution: [What was done to resolve]
+Prevention: [Steps being taken to prevent recurrence]
+
+We are committed to providing reliable services and take this incident very
+seriously. Your Customer Success Manager, [CSM name], will reach out within
+one business day to discuss this incident and any applicable SLA credits.
+
+We sincerely apologize for the disruption.
+
+Regards,
+Nexus Technology Solutions Operations Team
+operations@nexustech.io
+
+================================================================================
+7. RUNBOOKS BY SYSTEM TYPE
+================================================================================
+
+7.1 KUBERNETES CLUSTER ISSUES
+-------------------------------
+
+SYMPTOM: Pods in CrashLoopBackOff
+1. kubectl get pods -n [namespace] — identify affected pods
+2. kubectl logs [pod-name] --previous — check logs from crashed instance
+3. kubectl describe pod [pod-name] — check events and resource limits
+4. Check Prometheus: query container_restart_count{namespace="[ns]"}
+5. Common causes: OOM kill (increase memory limit), config error (check
+   recent deployments in ArgoCD), dependency unavailable (check service
+   dependencies)
+6. If OOM: kubectl top pods -n [namespace] to confirm, scale vertically
+7. If bad deployment: kubectl rollout undo deployment/[name] -n [namespace]
+
+SYMPTOM: Node NotReady
+1. kubectl get nodes — identify NotReady nodes
+2. kubectl describe node [node-name] — check conditions and events
+3. SSH to node: systemctl status kubelet
+4. Check disk: df -h — nodes go NotReady when disk >85% on system partition
+5. Check memory: free -h — check for OOM
+6. If node is recoverable: sudo systemctl restart kubelet
+7. If node hardware failure: cordon and drain (kubectl cordon / kubectl drain)
+
+SYMPTOM: Kubernetes API server unreachable
+1. Verify control plane nodes are running: check Grafana "Kubernetes Cluster"
+   dashboard
+2. SSH to control plane node: sudo crictl ps | grep kube-apiserver
+3. Check etcd health: sudo etcdctl endpoint health --cluster
+4. If etcd quorum lost: THIS IS A P1 — escalate to Infrastructure Lead
+   immediately. Do NOT attempt etcd recovery without senior guidance.
+
+7.2 DATABASE ISSUES
+--------------------
+
+SYMPTOM: PostgreSQL primary unavailable (Patroni cluster)
+1. Check Patroni status: patronictl -c /etc/patroni.yml list
+2. If automatic failover has occurred, Patroni promotes replica automatically
+   — verify new primary is healthy
+3. Check connection pool (PgBouncer): systemctl status pgbouncer
+4. If failover did NOT occur: check primary server health via vSphere console
+5. Manual failover (only with IC approval): patronictl failover nexus-pg-cluster
+6. Verify application reconnection after failover — some apps require restart
+7. Page James Okafor (Database Lead) for any P1 database incident
+
+SYMPTOM: Database replication lag > 60 seconds
+1. Check Patroni lag: patronictl -c /etc/patroni.yml list (shows lag in bytes)
+2. Check replica I/O: vmstat 1 10 on replica server
+3. Common cause: network congestion on storage VLAN (VLAN 40)
+4. Check iSCSI traffic on Nexus switches: show interfaces ethernet [port]
+5. If lag > 30 minutes: alert on-call DBA (James Okafor)
+6. If lag > 2 hours: consider P1 escalation — RPO may be at risk
+
+7.3 NETWORK ISSUES
+-------------------
+
+SYMPTOM: MPLS WAN circuit down
+1. Check AT&T portal: att.com/business/network-management
+2. Verify SD-WAN failover to internet backup occurred automatically
+   — check Viptela dashboard
+3. Check Palo Alto GlobalProtect VPN performance (may be degraded on internet)
+4. Open AT&T ticket if circuit is confirmed down: 1-800-222-0300
+5. Notify Marcus Chen and all ICs if MPLS is down > 30 minutes
+6. Check if internet DIA circuits are healthy (Comcast: 1-800-391-3000)
+
+SYMPTOM: Firewall policy blocking legitimate traffic
+1. Check Palo Alto Traffic logs in Panorama
+2. Filter by destination IP and application to identify block rule
+3. Do NOT disable security policies without IC approval
+4. If business-critical traffic is blocked: create temporary allow rule with
+   expiration (24 hours max) and document in ServiceNow
+5. Schedule proper rule review within 5 business days
+
+7.4 STORAGE ISSUES
+-------------------
+
+SYMPTOM: PowerStore array alerts
+1. Log into PowerStore Manager: https://powerstore-chi.nexustech.local
+2. Check Events and Alerts section
+3. For drive failure: array handles automatically if spare available
+4. For multiple drive failures (degraded pool): P1 — call Dell EMC support
+   immediately: 1-800-945-3355, reference tag NXT-PROD-2024
+5. For capacity alert (>85%): identify largest datastores, escalate to IC
+   if no immediate relief available
+
+SYMPTOM: vSAN health degraded
+1. Check vSAN Health in vSphere Client (Monitor > vSAN > Health)
+2. Host network failure: check vSAN VMkernel adapters on affected host
+3. Disk failure in vSAN: check vSAN disk groups, identify failed device
+4. If vSAN is below required FTT (Failure to Tolerate) level: P1 immediately
+
+================================================================================
+8. POST-INCIDENT REVIEW PROCESS
+================================================================================
+
+8.1 PIR REQUIREMENTS
+---------------------
+All P1 incidents require a formal Post-Incident Review (PIR). P2 incidents
+require a PIR if customer SLA was breached or if the IC determines one is
+warranted.
+
+PIR document must be completed within 5 business days of incident resolution.
+PIR template is available in Confluence: https://nexustech.atlassian.net/pir
+
+8.2 PIR STRUCTURE
+------------------
+Required sections:
+1. Incident summary (1 paragraph)
+2. Timeline of events (from first alert to resolution, with timestamps)
+3. Root cause analysis (use 5 Whys methodology)
+4. Customer impact statement (duration, scope, SLA credit if applicable)
+5. Contributing factors (technical, process, human)
+6. Action items (specific, assigned, with due dates)
+7. Lessons learned
+
+8.3 PIR DISTRIBUTION
+---------------------
+Completed PIR is reviewed in the weekly Infrastructure team meeting and
+shared with:
+- All infrastructure team members
+- VP of Engineering
+- Account management team (for any customer-impacting incidents)
+- Customer success managers for directly affected customers
+
+Blameless culture: PIRs focus on systems and processes, not individuals.
+Engineers are encouraged to be transparent about mistakes. Blame or
+punitive language is not permitted in PIR documents.
+
+8.4 ACTION ITEM TRACKING
+-------------------------
+All PIR action items are tracked in ServiceNow as linked tasks to the
+original incident. Due dates are mandatory. Overdue action items are
+reviewed weekly by the Infrastructure Lead and escalated to the VP if
+overdue by more than 2 weeks.
+
+================================================================================
+9. CUSTOMER SLA COMMITMENTS
+================================================================================
+
+9.1 STANDARD SLA TIERS
+------------------------
+Nexus offers three SLA tiers to managed service customers:
+
+STANDARD (included in base MSA):
+- Monthly uptime guarantee: 99.5%
+- Allowed downtime per month: 3 hours 39 minutes
+- P1 response SLA: 4 hours
+- Credit for breach: 10% of monthly invoice per hour over limit
+
+PREMIUM (add-on, $2,500/month):
+- Monthly uptime guarantee: 99.9%
+- Allowed downtime per month: 43 minutes
+- P1 response SLA: 2 hours
+- Credit for breach: 15% of monthly invoice per hour over limit
+- Quarterly business review with dedicated account team
+
+ENTERPRISE (negotiated, $8,000/month minimum):
+- Monthly uptime guarantee: 99.95%
+- Allowed downtime per month: 21 minutes
+- P1 response SLA: 1 hour
+- 24/7 dedicated support line
+- Credit for breach: 25% of monthly invoice per hour over limit
+- Monthly operational review with VP-level participation
+
+9.2 CUSTOMERS ON ENTERPRISE SLA (as of January 2026)
+------------------------------------------------------
+1. Meridian Financial Group — account manager: David Park
+2. Cascade Health Systems — account manager: Jennifer Wu
+3. Stratford Manufacturing — account manager: Brian Kowalski
+4. Pacific Coast Logistics — account manager: Jennifer Wu
+5. Atlas Insurance Partners — account manager: David Park
+
+Note: Enterprise SLA customers must be notified within 15 minutes of any
+P1 incident declaration. IC is responsible for direct customer contact if
+the account manager is unreachable.
+
+9.3 SLA CREDIT PROCESS
+------------------------
+SLA credit requests are processed by the finance team monthly:
+1. NOC manager reviews all incidents for SLA impact within 5 days of month end
+2. Credits calculated and approved by VP of Customer Success (Aaron Chang)
+3. Credits applied to next month's invoice automatically
+4. Customers notified of credits via email from accounts@nexustech.io
+
+Total SLA credits issued FY2025: $34,200 across 8 incidents
+
+================================================================================
+END OF DOCUMENT
+================================================================================
+Document Owner: Lauren Mitchell, NOC Manager
+Review Cycle: Monthly
+Next Review: January 31, 2026
+Emergency updates to on-call contacts: noc@nexustech.io
+================================================================================

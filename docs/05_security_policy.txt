@@ -1,0 +1,656 @@
+NEXUS TECHNOLOGY SOLUTIONS
+INFORMATION SECURITY POLICY
+Document Version: 4.1
+Effective Date: January 1, 2026
+Owner: Sandra Kim, Chief Information Security Officer
+Classification: Internal Use Only
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+1. Purpose, Scope, and Objectives
+2. Governance and Compliance Framework
+3. Access Control Policy
+4. Data Classification and Handling
+5. Endpoint Security Policy
+6. Network Security Policy
+7. Cloud Security Policy
+8. Incident Response Security Requirements
+9. Vulnerability Management Program
+10. Security Awareness and Training
+11. Third-Party and Vendor Security
+12. Audit and Compliance Monitoring
+
+================================================================================
+1. PURPOSE, SCOPE, AND OBJECTIVES
+================================================================================
+
+1.1 PURPOSE
+-----------
+This Information Security Policy establishes the security requirements,
+standards, and guidelines that govern the protection of Nexus Technology
+Solutions' information assets and the systems used to process, store, and
+transmit those assets, including customer data entrusted to Nexus under
+managed service agreements.
+
+1.2 SCOPE
+---------
+This policy applies to:
+- All Nexus Technology Solutions employees, contractors, and consultants
+- All company-owned and managed systems, applications, and infrastructure
+- All cloud-hosted systems managed by or on behalf of Nexus
+- Customer systems managed under managed service agreements (MSAs)
+- Third-party vendors with access to Nexus or customer systems
+
+1.3 OBJECTIVES
+--------------
+- Protect the confidentiality, integrity, and availability of information
+- Comply with applicable legal, regulatory, and contractual requirements
+- Prevent unauthorized access to systems and data
+- Enable rapid detection and response to security incidents
+- Maintain customer trust through demonstrable security practices
+
+1.4 COMPLIANCE FRAMEWORK
+-------------------------
+Nexus Technology Solutions maintains the following compliance certifications
+and frameworks:
+
+SOC 2 Type II: Annually audited (most recent: October 2025)
+- Trust Service Criteria: Security, Availability, Confidentiality
+- Auditor: Deloitte & Touche LLP
+- Clean opinion issued November 2025
+- Next audit: October 2026
+
+HIPAA Business Associate: Nexus operates as a Business Associate for 8
+healthcare customers. BAAs are on file for all 8. Annual HIPAA risk
+assessment completed September 2025.
+
+PCI DSS: Nexus processes no payment card data directly. Applicable to
+customers; Nexus assists customers with PCI scoping and compliance.
+
+ISO 27001: Pursuit planned for 2026. Pre-assessment completed Q3 2025.
+Identified 34 gaps; remediation 60% complete.
+
+NIST Cybersecurity Framework (CSF) 2.0: Used as internal maturity model.
+Current maturity assessment: 3.2/5.0 overall.
+
+================================================================================
+2. GOVERNANCE AND COMPLIANCE FRAMEWORK
+================================================================================
+
+2.1 SECURITY GOVERNANCE STRUCTURE
+-----------------------------------
+Security Steering Committee:
+- Chair: Robert Hargrove (CEO)
+- Members: Sandra Kim (CISO), Marcus Chen (VP Infrastructure), Rachel Nguyen
+  (VP Engineering), Patricia Williams (VP Finance), Aaron Chang (VP CS)
+- Meets quarterly (or ad hoc for major security events)
+- Reviews security metrics, approves policy changes, reviews incident reports
+
+Security Operations:
+- Security Operations Center (SOC): 4 analysts (24/7 monitoring)
+- GRC function: 2 analysts (compliance, risk management, audits)
+- Application Security: 2 engineers (SAST/DAST, secure code review)
+- Security Engineering: 2 engineers (tool management, detection engineering)
+
+2.2 RISK MANAGEMENT
+--------------------
+Annual security risk assessment is conducted each September following the
+NIST SP 800-30 methodology. Identified risks are logged in the risk register
+maintained by the GRC team in ServiceNow GRC module.
+
+Risk acceptance criteria:
+- Low risk (score 1-3): Accept or treat at team discretion
+- Medium risk (score 4-6): Require documented treatment plan, VP review
+- High risk (score 7-9): Require treatment plan, CISO sign-off, 90-day target
+- Critical risk (score 10+): Require immediate escalation to CEO, 30-day target
+
+Current open critical/high risks (as of January 2026):
+1. Domain Admin account count exceeds target (14 vs target 6) [HIGH, Score 8]
+   Treatment: CyberArk EPM deployment + PAM review, due Q2 2026
+2. Legacy TLS 1.0/1.1 enabled on 3 internal legacy applications [HIGH, Score 7]
+   Treatment: Application team upgrading, target February 2026
+3. Third-party vendor access not uniformly logged in CyberArk [MEDIUM, Score 6]
+   Treatment: Vendor onboarding to CyberArk, target March 2026
+
+================================================================================
+3. ACCESS CONTROL POLICY
+================================================================================
+
+3.1 PRINCIPLE OF LEAST PRIVILEGE
+----------------------------------
+All access rights must adhere to the principle of least privilege: users and
+systems are granted only the access required to perform their function. Access
+rights must be reviewed at least annually and upon any role change.
+
+3.2 USER ACCESS MANAGEMENT
+---------------------------
+Provisioning:
+- All user accounts are created through the IT service desk via ServiceNow
+- Manager approval is required for all access requests
+- Access is provisioned within 1 business day for standard access,
+  3 business days for privileged access
+- New employee accounts are pre-staged 24 hours before start date
+- Access is removed within 4 hours of separation notification from HR
+
+Review:
+- Quarterly access reviews for privileged accounts and sensitive systems
+- Annual access review for all other accounts
+- Access recertification completed by managers in Saviynt IGA platform
+- Accounts not recertified within the window are automatically disabled
+
+Privileged Access:
+- Privileged accounts (domain admin, root, vSphere admin) are managed in
+  CyberArk PAM
+- No direct login with privileged credentials — all privileged sessions
+  use CyberArk's session proxy
+- Privileged sessions are recorded and retained for 12 months
+- Break-glass accounts are sealed in CyberArk with dual-approval workflow
+
+3.3 AUTHENTICATION REQUIREMENTS
+--------------------------------
+Multi-Factor Authentication (MFA):
+- Required for ALL access to company systems (no exceptions)
+- Microsoft Authenticator (push notification or TOTP) is the standard
+- FIDO2 hardware keys (YubiKey) are required for: all domain admin accounts,
+  all CISO-level access, CI/CD pipeline service accounts with prod access
+- SMS-based MFA is not permitted for any privileged access
+
+Password Requirements (see also Section 8.3 of Employee Handbook):
+- Minimum 16 characters for privileged accounts
+- Minimum 12 characters for standard accounts
+- No dictionary words, keyboard patterns, or personal information
+- Enforce through Azure AD Password Protection and CyberArk policies
+- Passphrase format strongly encouraged
+
+Service Accounts:
+- Must use certificate-based or API key authentication where possible
+- If password required: minimum 32 characters, randomly generated,
+  managed in CyberArk
+- Service accounts must not have interactive login privileges
+- Service accounts must not share credentials across multiple services
+
+3.4 REMOTE ACCESS POLICY
+-------------------------
+- All remote access to Nexus systems requires GlobalProtect VPN
+- VPN requires MFA (push notification, minimum)
+- Split-tunneling is disabled on corporate VPN profiles
+- VPN access for contractors is time-limited (90-day automatic expiration,
+  renewable with manager approval)
+- Customer system access exclusively via CyberArk session proxy
+- Palo Alto Prisma Access (ZTNA) is being deployed for developer access
+  to Kubernetes clusters, replacing SSH over VPN (target: Q2 2026)
+
+================================================================================
+4. DATA CLASSIFICATION AND HANDLING
+================================================================================
+
+4.1 DATA CLASSIFICATION LEVELS
+--------------------------------
+RESTRICTED (Highest sensitivity):
+Definition: Data that if disclosed could result in significant legal, financial,
+or reputational harm, or that is subject to regulatory requirements.
+Examples: Customer PHI, PII (SSN, DOB, financial account numbers),
+authentication credentials, cryptographic keys, security vulnerabilities,
+M&A information, employee medical information
+Handling: Encrypt at rest (AES-256) and in transit (TLS 1.2+), access limited
+to authorized personnel on need-to-know basis, no storage on unmanaged devices,
+audit log all access, delete per retention schedule
+
+CONFIDENTIAL:
+Definition: Internal business information not approved for external distribution.
+Examples: Customer configurations, internal pricing, personnel data (non-PHI),
+business strategies, contract terms, incident reports, security policies
+Handling: Encrypt in transit, store in company-approved systems, limit access
+to employees with business need
+
+INTERNAL:
+Definition: General internal business information, limited risk if disclosed.
+Examples: Internal process documents, meeting notes, training materials,
+general IT documentation
+Handling: Company network or approved cloud storage, basic access controls
+
+PUBLIC:
+Definition: Information approved for public release.
+Examples: Marketing materials, public website content, published job postings
+Handling: No special requirements
+
+4.2 CUSTOMER DATA HANDLING
+---------------------------
+Customer data processed or stored by Nexus under an MSA is classified as
+Restricted by default regardless of the customer's own classification.
+
+Customer data must:
+- Be stored only in systems and locations specified in the MSA
+- Never be co-mingled with other customer data without explicit approval
+- Be deleted within 30 days of contract termination per the data deletion
+  addendum in the standard MSA
+- Not be used for any purpose other than delivering the contracted service
+- Not be accessed by Nexus personnel without documented business justification
+
+Violations of customer data handling requirements are treated as P1 security
+incidents and must be reported to the CISO within 1 hour of discovery.
+
+4.3 DATA RETENTION AND DISPOSAL
+---------------------------------
+Standard retention schedules:
+- Customer operational data: Duration of contract + 1 year
+- Security logs and audit trails: 2 years minimum (7 years for HIPAA customers)
+- Financial records: 7 years
+- Email: 7 years (Microsoft 365 retention policy)
+- Employee records: 7 years post-separation
+
+Data disposal requirements:
+- Electronic media: NIST 800-88 compliant wiping (Blancco for HDDs/SSDs)
+- Physical media (paper): Cross-cut shredding via Iron Mountain shred service
+- Cloud data: API-driven deletion with confirmation logs retained
+- Data disposal is logged and certificates retained for 3 years
+
+================================================================================
+5. ENDPOINT SECURITY POLICY
+================================================================================
+
+5.1 ENDPOINT REQUIREMENTS
+--------------------------
+All company-managed endpoints (laptops, workstations) must have:
+
+CrowdStrike Falcon Agent:
+- Prevention policy: Block on severity 3+ detections
+- Threat intelligence: Falcon Intelligence subscription
+- Identity protection: Falcon Identity enabled for domain-joined systems
+- USB device control: Restrict to company-approved USB devices
+- Response: Real-time response (RTR) enabled for SOC use
+
+MDM Enrollment:
+- Jamf Pro for macOS (all Mac endpoints)
+- Microsoft Intune for Windows (all Windows endpoints)
+- Configuration profiles enforced: disk encryption, screen lock, firewall,
+  software update policies
+- Non-compliant devices blocked from network via Conditional Access
+
+Approved Operating Systems:
+- macOS 14 (Sonoma) or later — no exceptions
+- Windows 11 22H2 or later — no exceptions
+- Legacy OS devices must be isolated on separate VLAN and approved by CISO
+
+5.2 SOFTWARE ALLOWLIST
+-----------------------
+Only approved software may be installed on company endpoints. Software requests
+are submitted through ServiceNow and approved by IT and Security within
+5 business days.
+
+Pre-approved software categories (no ticket needed):
+- Developer tools from approved vendors (see intranet list)
+- Microsoft 365 applications
+- Browser extensions reviewed and approved by security team
+
+Prohibited software:
+- Unapproved VPN clients
+- Peer-to-peer file sharing applications
+- Personal cloud storage clients (Google Drive, Dropbox personal — OneDrive
+  for Business is approved)
+- Software from torrent or unofficial sources
+- Cryptocurrency mining software
+
+5.3 MOBILE DEVICE POLICY
+-------------------------
+Personal mobile devices (BYOD) may access email and basic Microsoft 365
+applications via Microsoft Authenticator + Intune App Protection Policy.
+
+BYOD devices may NOT:
+- Access Nexus internal network via VPN
+- Access customer systems
+- Store company data outside Microsoft 365 protected apps
+- Be used for on-call response to production systems (must use company device)
+
+Company-issued mobile phones are provided to: all NOC on-call staff,
+account managers, VP and above. Managed via Intune.
+
+================================================================================
+6. NETWORK SECURITY POLICY
+================================================================================
+
+6.1 NETWORK SEGMENTATION
+--------------------------
+Nexus production networks are segmented per the VLAN structure documented
+in the Infrastructure Overview. Traffic between segments is controlled by
+Palo Alto firewalls with explicit allow rules.
+
+Zero-trust principles applied:
+- No implicit trust based on network location
+- All inter-segment traffic is inspected by firewall application policies
+- East-west traffic within Kubernetes is controlled by Istio service mesh
+  and enforced at the pod level
+- Database access: only application pods in approved namespaces may connect
+  to database endpoints
+
+6.2 FIREWALL CHANGE MANAGEMENT
+--------------------------------
+All firewall rule changes require:
+- ServiceNow change request with business justification
+- Peer review by a second network security engineer
+- CISO approval for any rule affecting the DMZ or reducing security posture
+- Implementation only during approved maintenance windows (unless P1)
+- Post-implementation verification documented in the change record
+- Temporary rules must have an expiration date (maximum 90 days)
+
+Firewall rules are reviewed quarterly. Rules unused for 90 days are flagged
+for removal. Business justification must be re-submitted or rules are removed.
+
+6.3 WIRELESS SECURITY
+----------------------
+Corporate wireless (SSID: NexusCorp):
+- WPA3-Enterprise authentication
+- RADIUS authentication via Cisco ISE
+- Corporate devices only; certificate-based authentication
+- Clients placed on corporate VLAN 70
+
+Guest wireless (SSID: NexusGuest):
+- WPA2-PSK with rotating monthly password
+- Completely isolated from corporate network
+- Internet-only access, 10Mbps bandwidth limit per client
+- Password available from front desk or IT service desk
+
+IOT/Lab wireless (SSID: NexusLab — not broadcast):
+- Dedicated VLAN for lab equipment
+- No access to production networks
+- Requires IT ticket to obtain credentials
+
+================================================================================
+7. CLOUD SECURITY POLICY
+================================================================================
+
+7.1 AZURE SECURITY STANDARDS
+------------------------------
+All Azure subscriptions must comply with the following baseline:
+
+Identity and Access:
+- Azure RBAC: Assign roles at resource group level, not subscription
+- No "Owner" role assignments to individual users
+- All privileged Azure roles through Privileged Identity Management (PIM)
+  with just-in-time access (maximum 8-hour activation)
+- Service principals must use Managed Identity where possible; if secret
+  required, stored in Azure Key Vault
+
+Network:
+- All virtual networks use private endpoints for PaaS services
+- No public IP addresses on virtual machines (use Bastion or VPN)
+- Network Security Groups on all subnets, reviewed quarterly
+- Azure DDoS Protection Standard on all production VNets
+
+Monitoring and Logging:
+- All subscriptions enrolled in Microsoft Defender for Cloud (Standard tier)
+- Defender for Cloud score target: 85% (current: 78%)
+- All diagnostic logs sent to central Log Analytics workspace
+- Azure Activity Log retention: 90 days in Log Analytics, 2 years in archive
+
+7.2 AWS SECURITY STANDARDS
+---------------------------
+AWS accounts must comply with AWS Foundational Security Best Practices
+(automated assessment via AWS Security Hub):
+- Root account MFA enabled
+- CloudTrail enabled in all regions, logs sent to central S3 bucket
+- GuardDuty enabled in all regions
+- S3 public access block enabled by default on all buckets
+- No access keys for root account
+- EC2 instances use IMDSv2 only
+
+================================================================================
+8. INCIDENT RESPONSE SECURITY REQUIREMENTS
+================================================================================
+
+8.1 SECURITY INCIDENT DEFINITION
+----------------------------------
+A security incident is any event that actually or potentially compromises the
+confidentiality, integrity, or availability of Nexus or customer data, or
+violates security policy. This includes but is not limited to:
+
+Confirmed incidents:
+- Unauthorized access to systems or data
+- Malware infection on any endpoint or server
+- Data exfiltration (confirmed or suspected)
+- Ransomware
+- Unauthorized configuration change to security controls
+- Physical breach of data center
+
+Suspected incidents (investigate immediately):
+- Unusual login patterns or failed MFA attempts
+- Unexplained network traffic
+- Alerts from CrowdStrike, Microsoft Defender, or Palo Alto WildFire
+- Employee reports of suspicious activity
+
+8.2 INCIDENT RESPONSE REQUIREMENTS
+-------------------------------------
+Reporting:
+All suspected security incidents must be reported to the SOC within 1 hour
+of discovery, regardless of certainty. Contact:
+- SOC hotline: +1-312-555-0600 (24/7)
+- Email: soc@nexustech.io
+- Slack: #security-incidents
+
+Do NOT attempt to investigate security incidents yourself unless you are SOC
+staff or are specifically directed by the CISO.
+
+Preservation:
+Do not power off or wipe affected systems without SOC authorization. Evidence
+preservation is critical for investigation and potential legal proceedings.
+
+Regulatory Notification:
+- HIPAA breach: Affected individuals notified within 60 days; HHS within
+  60 days (or annually for breaches < 500 individuals)
+- SOC 2 breach: Customer notification within 72 hours
+- State breach notification laws: As required by applicable state law
+  (typically 30-72 hours)
+- CISO and Legal counsel involved in all regulatory notification decisions
+
+8.3 SECURITY INCIDENT SLAs
+---------------------------
+Per the incident response runbook (Section 9 of IR Runbook), security incidents
+map to severity levels as follows:
+
+P1 Security (15-minute response): Active ransomware/malware, data breach
+  confirmed, unauthorized privileged access, critical system compromise
+
+P2 Security (1-hour response): Suspected data exposure, failed intrusion
+  attempt, malware on isolated endpoint, suspicious privileged activity
+
+P3 Security (4-hour response): Policy violation (non-critical), phishing
+  attempt (no click), vulnerability with working exploit in the wild
+
+================================================================================
+9. VULNERABILITY MANAGEMENT PROGRAM
+================================================================================
+
+9.1 SCANNING SCHEDULE
+----------------------
+External vulnerability scanning (Tenable Nessus / Tenable.io):
+- Internet-facing systems: Weekly authenticated scans
+- All internal systems: Monthly credentialed scans
+- Pre-production scanning: Required before any major infrastructure change
+
+Web application scanning:
+- DAST scanning: Bi-weekly on all customer-facing web applications
+- SAST: Integrated into CI/CD pipeline (SonarQube + Semgrep)
+- Penetration testing: Annual external penetration test by third party
+  (most recent: August 2025, conducted by NCC Group)
+
+Container scanning:
+- All container images scanned by Trivy in CI/CD pipeline
+- Images with critical CVEs are blocked from deployment to production
+- Images with high CVEs require security team approval
+
+9.2 REMEDIATION SLAs
+---------------------
+CRITICAL (CVSS 9.0-10.0): Patch or mitigate within 15 days
+HIGH (CVSS 7.0-8.9): Patch or mitigate within 30 days
+MEDIUM (CVSS 4.0-6.9): Patch or mitigate within 90 days
+LOW (CVSS 0.1-3.9): Patch during next scheduled maintenance window
+
+Exceptions to remediation SLAs require:
+- Written risk acceptance signed by CISO
+- Compensating controls documented
+- Review at next security steering committee meeting
+
+Current patch compliance (as of December 2025):
+- Critical: 96% within SLA (4 exceptions, all with approved compensating
+  controls)
+- High: 89% within SLA (11 open items in remediation)
+- Medium: 84% within SLA (acceptable threshold: 80%)
+
+9.3 PENETRATION TESTING
+------------------------
+Annual third-party penetration test scope includes:
+- External network penetration test
+- Web application assessment (all customer-facing applications)
+- Social engineering assessment (phishing simulation)
+- Optional: Physical security assessment (conducted every 3 years)
+
+Most recent penetration test: August 2025 (NCC Group)
+- Critical findings: 0
+- High findings: 3 (all remediated by October 2025)
+- Medium findings: 11 (9 remediated, 2 in progress)
+- Low/Informational: 24
+
+Next penetration test: Scheduled August 2026.
+
+================================================================================
+10. SECURITY AWARENESS AND TRAINING
+================================================================================
+
+10.1 MANDATORY TRAINING
+------------------------
+All employees must complete the following security training:
+
+Annual (due January 31 each year):
+- Information Security Awareness — 60 minutes (KnowBe4)
+- Phishing awareness and simulation training — ongoing quarterly simulations
+- HIPAA awareness (required for all staff due to healthcare customer base)
+- Data handling and privacy — 30 minutes
+
+Upon hire (within 30 days):
+- Security awareness onboarding module — 45 minutes
+- Acceptable use policy acknowledgment
+- CNDA signing
+
+Role-specific (technical staff):
+- Secure coding practices — annual (OWASP Top 10, 90 minutes)
+- Cloud security fundamentals — annual for cloud team
+- Incident response tabletop participation — annual for on-call engineers
+
+10.2 PHISHING SIMULATION PROGRAM
+----------------------------------
+KnowBe4 is used for ongoing phishing simulation and security awareness:
+- Monthly simulated phishing emails sent to all staff
+- Employees who click simulated phishing links are enrolled in immediate
+  remedial training (15 minutes)
+- Click rate tracked monthly; company target: < 5% click rate
+- Current click rate (December 2025): 3.8% (below target, improving)
+- Employees with 3+ clicks in a calendar year: mandatory 1:1 with CISO
+
+================================================================================
+11. THIRD-PARTY AND VENDOR SECURITY
+================================================================================
+
+11.1 VENDOR RISK ASSESSMENT
+-----------------------------
+All vendors with access to Nexus or customer systems must complete a vendor
+risk assessment before access is granted:
+
+Tier 1 Vendors (access to Restricted data or production systems):
+- Full security questionnaire (SIG Lite format)
+- SOC 2 Type II report review (or equivalent)
+- Annual reassessment
+- Security addendum required in contract
+- Examples: Cloud providers, MSP tools, security vendors, backup vendors
+
+Tier 2 Vendors (access to Confidential data or internal systems):
+- Abbreviated security questionnaire
+- Annual reassessment
+- Examples: Payroll processor, HR system, CRM
+
+Tier 3 Vendors (no data access, software only):
+- Standard due diligence (company reputation, license terms)
+- No formal questionnaire required
+
+11.2 VENDOR ACCESS CONTROLS
+-----------------------------
+Vendor access to production systems:
+- All vendor access via CyberArk (no direct credentials)
+- Access scoped to minimum necessary systems
+- Time-limited access: granted for defined project duration
+- Sessions recorded and retained
+- Access revoked within 24 hours of project completion
+- Quarterly review of all active vendor access
+
+11.3 SOFTWARE SUPPLY CHAIN
+---------------------------
+Open source and third-party software used in Nexus products:
+- All open source dependencies scanned by Dependency-Track
+- SBOM (Software Bill of Materials) generated for all production applications
+- Critical dependencies reviewed quarterly by Security Engineering
+- License compliance enforced (no GPL 3.0 in customer-deployed code without
+  legal review)
+
+================================================================================
+12. AUDIT AND COMPLIANCE MONITORING
+================================================================================
+
+12.1 CONTINUOUS MONITORING
+---------------------------
+Security metrics tracked monthly and reported to Security Steering Committee:
+
+Technical metrics:
+- Patch compliance rate (by severity)
+- MFA enrollment rate (target: 100%)
+- Privileged account count vs target
+- SOC alert volume and false positive rate
+- CrowdStrike detection and response time
+- Defender for Cloud secure score
+
+Process metrics:
+- Security training completion rate
+- Phishing simulation click rate
+- Vendor risk assessment completion rate
+- Access review completion rate
+- Vulnerability remediation SLA compliance
+
+12.2 INTERNAL AUDIT
+--------------------
+Security self-assessments are conducted quarterly by the GRC team:
+- Access review completion verification
+- Firewall rule review
+- Privileged account review
+- Policy exception review
+- Vulnerability remediation status
+
+12.3 EXTERNAL AUDIT
+--------------------
+Annual SOC 2 Type II audit conducted by Deloitte (October each year).
+HIPAA risk assessment conducted annually (September).
+Penetration test conducted annually (August).
+
+All audit findings are tracked in ServiceNow GRC with assigned owners and
+due dates. Audit findings are reported to the Security Steering Committee.
+
+================================================================================
+EXCEPTIONS TO THIS POLICY
+================================================================================
+
+Requests for exceptions to any requirement in this policy must be submitted
+to the CISO (Sandra Kim, sandra.kim@nexustech.io) with:
+- Business justification
+- Risk assessment
+- Proposed compensating controls
+- Requested duration of exception
+
+The CISO may approve exceptions for up to 90 days. Exceptions beyond 90 days
+require Security Steering Committee approval.
+
+================================================================================
+END OF DOCUMENT
+================================================================================
+Document Owner: Sandra Kim, CISO
+Review Cycle: Quarterly for Section 8 and 9; Annually for full document
+Next Full Review: January 2027
+Emergency security contact: soc@nexustech.io | +1-312-555-0600
+================================================================================

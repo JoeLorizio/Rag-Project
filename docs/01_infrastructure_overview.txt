@@ -1,0 +1,585 @@
+NEXUS TECHNOLOGY SOLUTIONS
+IT INFRASTRUCTURE OVERVIEW
+Document Version: 3.2
+Last Updated: January 2026
+Owner: Infrastructure Team
+Classification: Internal Use Only
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+1. Executive Summary
+2. Data Center Locations and Physical Infrastructure
+3. Compute Infrastructure
+4. Storage Infrastructure
+5. Networking Architecture
+6. Cloud Infrastructure
+7. Backup and Disaster Recovery
+8. Monitoring and Observability
+9. Identity and Access Management
+10. Infrastructure Roadmap
+
+================================================================================
+1. EXECUTIVE SUMMARY
+================================================================================
+
+Nexus Technology Solutions operates a hybrid IT infrastructure spanning three
+on-premises data centers and a multi-cloud environment across Microsoft Azure
+and Amazon Web Services. The infrastructure supports approximately 340 internal
+employees, 87 active managed service customers, and an average of 2.1 million
+API transactions per day across our customer-facing platforms.
+
+Total infrastructure spend for fiscal year 2025 was $6.4 million, split
+approximately 55% on-premises and 45% cloud. The infrastructure team consists
+of 18 engineers organized into four functional groups: compute and
+virtualization, networking, storage and backup, and cloud operations.
+
+Current infrastructure availability SLA is 99.95% for Tier 1 services and
+99.9% for Tier 2 services, measured monthly. Actual availability for calendar
+year 2025 was 99.97% for Tier 1 and 99.91% for Tier 2.
+
+================================================================================
+2. DATA CENTER LOCATIONS AND PHYSICAL INFRASTRUCTURE
+================================================================================
+
+2.1 PRIMARY DATA CENTER — CHICAGO, IL (DC-CHI)
+------------------------------------------------
+Address: 350 N Orleans St, Suite 1200, Chicago, IL 60654
+Facility Type: Owned, managed by Nexus
+Total Usable Square Footage: 4,200 sq ft
+Power Capacity: 500kW utility feed with 400kW UPS
+Generator Backup: Dual 250kW Caterpillar diesel generators
+Generator Runtime: 72 hours at full load
+Cooling: Precision cooling via 6x Liebert units, N+1 configuration
+Fire Suppression: FM-200 clean agent system
+Physical Security: Biometric + badge access, 24/7 CCTV, on-site security guard
+Current Utilization: 68% power, 72% floor space
+
+DC-CHI houses the primary instances of all Tier 1 systems including the
+production Kubernetes clusters, primary database clusters, and the primary
+instance of our network operations center (NOC). This facility serves as the
+anchor site for our MPLS WAN.
+
+2.2 SECONDARY DATA CENTER — DALLAS, TX (DC-DAL)
+-------------------------------------------------
+Address: 1950 N Stemmons Fwy, Dallas, TX 75207 (colocation at Equinix DA6)
+Facility Type: Colocation
+Leased Space: 8 full cabinets, 2 half cabinets
+Power Allocation: 20kW dedicated
+Connectivity: Dual 10Gbps cross-connects to Equinix IX
+Annual Colo Cost: $248,000
+Current Utilization: 61% power, 55% cabinet space
+
+DC-DAL serves as the primary disaster recovery site for all Tier 1 workloads.
+All production databases are replicated synchronously to DC-DAL. In the event
+of a DC-CHI failure, Tier 1 services can be restored in DC-DAL within the
+8-hour RTO defined in the DR policy.
+
+2.3 EDGE LOCATION — NEW YORK, NY (EDGE-NYC)
+---------------------------------------------
+Address: 111 8th Ave, New York, NY 10011 (colocation at Google NYC)
+Facility Type: Colocation
+Leased Space: 2 full cabinets
+Power Allocation: 4kW dedicated
+Connectivity: Dual 1Gbps cross-connects
+Annual Colo Cost: $64,000
+Current Utilization: 40% power, 45% cabinet space
+
+EDGE-NYC hosts regional caching infrastructure, a local instance of our
+monitoring stack, and serves as a low-latency PoP for northeastern US
+customers. No primary production workloads run at this location.
+
+================================================================================
+3. COMPUTE INFRASTRUCTURE
+================================================================================
+
+3.1 VIRTUALIZATION PLATFORM
+-----------------------------
+Nexus operates VMware vSphere 8.0 Update 2 as the primary hypervisor platform
+across all three physical locations. The vSphere environment is managed through
+a centralized vCenter Server instance hosted in DC-CHI with a secondary
+vCenter in DC-DAL for failover.
+
+VMware vSAN 8.0 is deployed in DC-CHI for hyper-converged storage on the
+primary compute cluster. DC-DAL uses traditional SAN-attached storage.
+
+vSphere Cluster Summary:
+- DC-CHI Cluster A (Production): 12x Dell PowerEdge R750, 2x Intel Xeon Gold
+  6338 (64 cores total), 1.5TB RAM per host, 25GbE networking
+- DC-CHI Cluster B (Development/Test): 6x Dell PowerEdge R640, 2x Intel Xeon
+  Silver 4316 (40 cores total), 512GB RAM per host, 10GbE networking
+- DC-DAL Cluster A (DR): 8x Dell PowerEdge R750, 2x Intel Xeon Gold 6338,
+  1TB RAM per host, 25GbE networking
+- EDGE-NYC (Edge): 2x Dell PowerEdge R440, 1x Intel Xeon Gold 6226R,
+  256GB RAM per host, 10GbE networking
+
+Total vSphere Inventory: 28 physical hosts, 847 virtual machines
+Average vCPU Overcommit Ratio: 4.2:1
+Average RAM Overcommit Ratio: 1.3:1
+
+3.2 KUBERNETES PLATFORM
+------------------------
+Nexus operates Rancher Kubernetes Engine 2 (RKE2) as the container
+orchestration platform for all containerized workloads. There are currently
+four distinct Kubernetes clusters:
+
+Production Cluster (k8s-prod):
+- 6 control plane nodes (3 per data center for HA)
+- 24 worker nodes in DC-CHI, 12 worker nodes in DC-DAL
+- Node spec: 32 vCPU, 128GB RAM per node
+- Current workloads: 156 namespaces, 892 running pods
+- Storage: Longhorn distributed storage with Ceph backend
+
+Development Cluster (k8s-dev):
+- 3 control plane nodes (all DC-CHI)
+- 8 worker nodes
+- Node spec: 16 vCPU, 64GB RAM per node
+
+QA Cluster (k8s-qa):
+- 3 control plane nodes (all DC-CHI)
+- 6 worker nodes
+- Node spec: 16 vCPU, 64GB RAM per node
+
+Edge Cluster (k8s-edge):
+- 2 worker nodes (EDGE-NYC), no dedicated control plane
+- Managed as a downstream cluster from k8s-prod control plane
+- Hosts caching and CDN offload workloads only
+
+Kubernetes toolchain:
+- Helm 3.14 for package management
+- ArgoCD 2.10 for GitOps deployments
+- Prometheus + Grafana for cluster monitoring
+- Falco for runtime security
+- Cert-Manager for TLS certificate management
+- Istio 1.20 service mesh on k8s-prod
+
+3.3 BARE METAL INFRASTRUCTURE
+-------------------------------
+Beyond the vSphere and Kubernetes environments, Nexus operates several
+bare-metal systems for specialized workloads:
+
+Database Cluster (DC-CHI):
+- 3x Dell PowerEdge R860 (128 cores, 4TB RAM each)
+- Running PostgreSQL 16 in active-active Patroni cluster
+- 200TB NVMe raw storage per node
+
+GPU Compute Nodes (DC-CHI):
+- 2x Dell PowerEdge XE9680 with 8x NVIDIA H100 GPUs each
+- Used for internal ML model training and inference
+- Scheduled via Kubernetes GPU operator
+- These nodes are NOT shared with customer workloads
+
+Network Appliances:
+- 4x Cisco Catalyst 9300 core switches
+- 2x Cisco ASR 1002-X edge routers
+- 2x Palo Alto PA-5250 next-gen firewalls (active-passive HA)
+
+================================================================================
+4. STORAGE INFRASTRUCTURE
+================================================================================
+
+4.1 PRIMARY STORAGE (DC-CHI)
+------------------------------
+Dell PowerStore 3200T SAN Array
+- Raw Capacity: 1.2PB
+- Usable Capacity (after RAID, dedup, compression): 680TB
+- Protocol: FC 32Gb and iSCSI 25GbE
+- Current Utilization: 71% (483TB used)
+- Deduplication Ratio: 2.8:1
+- Compression Ratio: 1.9:1
+- Effective capacity savings: 58%
+
+VMware vSAN Cluster (DC-CHI Cluster A):
+- Raw Capacity: 384TB NVMe across 12 hosts (32TB per host)
+- Usable capacity (FTT=2, RAID-6): approximately 200TB
+- Used for Kubernetes persistent volumes and VM swap
+- Current utilization: 63%
+
+4.2 SECONDARY STORAGE (DC-DAL)
+--------------------------------
+Pure Storage FlashArray//C70
+- Raw Capacity: 480TB
+- Usable Capacity: 320TB
+- Protocol: FC 32Gb and NVMe-oF
+- Current Utilization: 58% (186TB used)
+- Serves as async replication target from DC-CHI PowerStore
+- Replication RPO: 15 minutes for Tier 1 data, 4 hours for Tier 2
+
+4.3 OBJECT STORAGE
+-------------------
+Nexus operates a self-hosted MinIO cluster in DC-CHI for unstructured data:
+- Total capacity: 2PB raw across 8 nodes
+- Used for backups, log archives, customer file uploads, and ML datasets
+- S3-compatible API, integrated with all internal services
+- Data replicated to AWS S3 in us-east-1 for additional durability
+
+4.4 BACKUP INFRASTRUCTURE
+---------------------------
+Veeam Backup & Replication 12 is the primary backup platform:
+- Backup Server: Dedicated Windows Server 2022 VM (32 vCPU, 64GB RAM)
+- Backup Proxies: 6x Linux proxies distributed across all sites
+- Primary Backup Target: Dell Data Domain DD9900 (500TB usable, DC-CHI)
+- Secondary Backup Target: Veeam Cloud Connect to Azure Blob (Hot tier)
+
+Backup Policy Summary:
+- Tier 1 VMs: Daily full, hourly synthetic incremental, 30-day retention
+- Tier 2 VMs: Daily incremental, weekly full, 14-day retention
+- Databases: Continuous log shipping + daily snapshot, 7-day local retention
+- Long-term archive: Monthly full backups to Azure Archive Blob, 7-year retention
+
+Backup success rate (last 90 days): 99.6%
+Average daily backup window: 4.2 hours
+Last successful DR test: November 14, 2025 (full DC-CHI failover simulation)
+
+================================================================================
+5. NETWORKING ARCHITECTURE
+================================================================================
+
+5.1 WAN CONNECTIVITY
+---------------------
+Nexus operates a private MPLS WAN provisioned through AT&T Business:
+
+DC-CHI (Primary):
+- Primary circuit: 10Gbps MPLS (AT&T)
+- Secondary circuit: 1Gbps dedicated internet (Comcast Business)
+- DIA internet: 10Gbps (Comcast Business)
+
+DC-DAL:
+- MPLS circuit: 1Gbps (AT&T)
+- DIA internet: 1Gbps (Zayo)
+
+EDGE-NYC:
+- Internet only: 1Gbps (Zendcom via Equinix IX)
+
+WAN traffic is managed by Cisco SD-WAN (Viptela) for intelligent path
+selection and application-aware routing. Critical applications are pinned
+to MPLS. Internet-destined traffic breaks out locally at each site.
+
+5.2 LAN ARCHITECTURE
+---------------------
+Core switching at DC-CHI follows a spine-leaf design:
+- 2x Cisco Nexus 93600CD-GX spine switches (100GbE uplinks)
+- 8x Cisco Nexus 93180YC-FX3 leaf switches (25GbE server ports)
+- Dedicated out-of-band management network (Cisco Nexus 3172)
+
+VLANs in use at DC-CHI:
+- VLAN 10: Production servers
+- VLAN 20: Development/Test servers
+- VLAN 30: Management/OOB
+- VLAN 40: Storage (iSCSI)
+- VLAN 50: VMware vMotion
+- VLAN 60: Kubernetes pod network (overlay via Istio)
+- VLAN 70: Corporate end-user devices
+- VLAN 100: DMZ / customer-facing services
+
+5.3 FIREWALL AND SECURITY
+--------------------------
+Palo Alto PA-5250 firewalls operate in active-passive HA at DC-CHI with
+Panorama 11.0 centralized management. Firewalls provide:
+- Layer 7 application inspection
+- Threat Prevention subscription (IPS/IDS)
+- URL Filtering
+- WildFire sandboxing for malware analysis
+- GlobalProtect VPN for remote access (6,200 licensed users)
+
+VPN gateway capacity: 10,000 concurrent sessions
+Current peak VPN usage: 287 concurrent sessions (end of business Tuesday)
+
+Palo Alto Prisma Access is deployed for ZTNA to Kubernetes workloads,
+replacing legacy VPN access for developer SSH access to production systems.
+
+5.4 DNS AND DHCP
+-----------------
+- Internal DNS: 3x Infoblox DDI appliances (DC-CHI primary, DC-DAL secondary)
+- External DNS: Cloudflare DNS with DNSSEC enabled
+- DHCP: Infoblox DDI, 12 scopes, approximately 2,400 active leases
+- Internal domain: nexustech.local
+- Public domains: nexustechnologysolutions.com, nexustech.io
+
+================================================================================
+6. CLOUD INFRASTRUCTURE
+================================================================================
+
+6.1 MICROSOFT AZURE
+--------------------
+Azure serves as the primary cloud platform for Nexus. Total Azure spend for
+FY2025 was $1.84 million (committed under an Enterprise Agreement with a
+3-year term expiring March 2027).
+
+Azure Organization Structure:
+- Management Group: NexusTech Root
+  - Production Subscription (nexus-prod): $94,000/month average
+  - Development Subscription (nexus-dev): $18,000/month average
+  - Shared Services Subscription (nexus-shared): $22,000/month average
+  - DR Subscription (nexus-dr): $12,000/month average
+
+Primary Azure services in use:
+- Azure Kubernetes Service (AKS): 3 clusters (prod, dev, staging)
+  - prod cluster: 40 nodes, Standard_D16s_v5
+  - Hosts all customer-facing SaaS applications
+- Azure SQL Managed Instance: 2 instances (prod + dev)
+  - Production: Business Critical tier, 32 vCores, 5.3TB storage
+  - Replication to on-prem PostgreSQL via Azure Data Factory
+- Azure Active Directory / Entra ID: Primary IdP for all SaaS apps
+  - 412 licensed users (Microsoft 365 E5)
+  - Synced from on-prem Active Directory via Azure AD Connect
+- Azure Blob Storage: 480TB current usage
+  - Hot tier: customer-uploaded documents and active datasets
+  - Cool tier: backup secondary copies
+  - Archive tier: compliance retention (HIPAA, SOC2 records)
+- Azure Monitor + Log Analytics Workspace: Centralized logging
+  - 28TB data ingested per month
+  - 90-day hot retention, 2-year cold retention
+- Azure Front Door: Global load balancing and WAF for all public endpoints
+- Azure DevOps: CI/CD pipelines for all customer-facing applications
+  - 340 active pipelines
+  - Average pipeline runtime: 8.4 minutes
+
+6.2 AMAZON WEB SERVICES
+------------------------
+AWS is used as a secondary cloud for specific workloads. Total AWS spend
+for FY2025 was $620,000.
+
+Primary AWS services in use:
+- AWS S3: Backup replica storage (secondary copy from on-prem MinIO)
+  - us-east-1 region
+  - Current storage: 180TB
+  - Monthly cost: ~$4,100
+- AWS EC2 (us-east-1): Development and testing overflow
+  - Reserved instances: 12x m6i.4xlarge, 3x r6i.8xlarge
+  - On-demand burst: variable, average $8,000/month
+- AWS RDS (PostgreSQL): Customer-isolated database instances
+  - 14 active RDS instances for specific customer requirements
+  - Customers requiring data isolation pay a per-instance premium
+- AWS Lambda: Event-driven processing for customer webhook integrations
+  - Average 4.2 million invocations/month
+  - Average duration: 340ms
+
+================================================================================
+7. BACKUP AND DISASTER RECOVERY
+================================================================================
+
+7.1 RECOVERY OBJECTIVES
+------------------------
+Tier 1 Services (Customer-facing SaaS, Core Platform):
+- Recovery Time Objective (RTO): 4 hours
+- Recovery Point Objective (RPO): 15 minutes
+- Services: Customer portal, API gateway, monitoring platform, billing system
+
+Tier 2 Services (Internal operations):
+- Recovery Time Objective (RTO): 8 hours
+- Recovery Point Objective (RPO): 4 hours
+- Services: Internal ticketing, HR systems, file shares, development tools
+
+Tier 3 Services (Non-critical):
+- Recovery Time Objective (RTO): 24 hours
+- Recovery Point Objective (RPO): 24 hours
+- Services: Test environments, internal wikis, archival systems
+
+7.2 DISASTER RECOVERY PROCEDURES
+----------------------------------
+Full DR procedures are documented in the Business Continuity Plan (BCP-2025)
+maintained by the Infrastructure team and reviewed quarterly. Key steps:
+
+1. Incident commander declares DR event after confirming DC-CHI is unavailable
+   for more than 30 minutes with no estimated restoration time
+2. On-call infrastructure lead contacts all Tier 1 application owners
+3. Veeam DR orchestration job initiated for DC-CHI VM replication to DC-DAL
+4. DNS failover executed via Cloudflare API (automated script: dr-failover.sh)
+5. Azure Front Door origin group switched from on-prem to Azure-only
+6. Customer communication sent from Statuspage.io within 15 minutes of DR
+   declaration
+7. Estimated total failover time for Tier 1 services: 3.5 hours
+
+7.3 DR TEST HISTORY
+--------------------
+Q4 2025 (November 14): Full failover test
+- Result: PASS
+- Tier 1 restoration time: 3 hours 22 minutes (within 4-hour RTO)
+- Issues identified: Azure AD Connect sync delay caused 40-minute auth
+  disruption. Remediation applied December 2025.
+
+Q2 2025 (May 8): Partial test (database failover only)
+- Result: PASS
+- Database restoration time: 47 minutes (within 1-hour target)
+
+Q1 2025 (February 19): Tabletop exercise only
+- Result: PASS (tabletop)
+- Identified gaps in communication runbook, updated March 2025
+
+================================================================================
+8. MONITORING AND OBSERVABILITY
+================================================================================
+
+8.1 MONITORING STACK
+---------------------
+Nexus operates a full-stack observability platform built on open-source
+components deployed in Kubernetes:
+
+Metrics:
+- Prometheus 2.49 (collection and storage)
+- Thanos (long-term metrics storage, 2-year retention)
+- Grafana 10.3 (visualization, 200+ dashboards)
+- AlertManager (alert routing and deduplication)
+
+Logs:
+- Fluent Bit (log shipping from all nodes and pods)
+- Loki 3.0 (log aggregation and indexing)
+- Grafana (log querying via Loki datasource)
+- Additionally: all logs forwarded to Azure Log Analytics
+
+Traces:
+- OpenTelemetry Collector (trace ingestion)
+- Tempo 2.3 (trace storage)
+- Grafana (trace visualization)
+
+Synthetic Monitoring:
+- Grafana k6 Cloud (external synthetic monitoring from 8 global locations)
+- Checks every 60 seconds for all Tier 1 endpoints
+- Uptime Robot (secondary external monitoring for customer-facing URLs)
+
+8.2 ALERTING STRUCTURE
+------------------------
+Alert routing is managed through AlertManager with PagerDuty integration:
+
+P1 (Critical):
+- Definition: Complete service unavailability, data loss risk, security breach
+- Response time: 15 minutes
+- Notification: PagerDuty (immediate call), Slack #incidents, SMS to on-call
+- On-call rotation: Infrastructure lead + application lead (weekly rotation)
+
+P2 (High):
+- Definition: Degraded performance, partial service impact, capacity threshold
+- Response time: 1 hour
+- Notification: PagerDuty (30-min delay), Slack #alerts
+
+P3 (Medium):
+- Definition: Non-customer-impacting issues, warning thresholds
+- Response time: Next business day
+- Notification: Slack #monitoring only
+
+Current alert volume (last 30 days):
+- P1 alerts fired: 3 (all resolved within SLA)
+- P2 alerts fired: 47
+- P3 alerts fired: 312
+
+8.3 CAPACITY PLANNING
+----------------------
+Capacity reviews are conducted quarterly by the infrastructure team. Current
+growth projections:
+
+Compute: 15% YoY growth in vCPU demand. DC-CHI Cluster A will reach 85%
+utilization by Q3 2026 without additional hardware. Budget request submitted
+for 4 additional PowerEdge R750 hosts ($280,000).
+
+Storage: 22% YoY growth in storage consumption. DC-CHI PowerStore will reach
+capacity by Q1 2027. Options under evaluation: expansion shelf ($180,000) or
+migration to cloud-based storage for Tier 2 data.
+
+Network: WAN bandwidth utilization peaks at 62% of MPLS capacity during
+business hours. No capacity issues anticipated within the 2-year planning
+horizon.
+
+================================================================================
+9. IDENTITY AND ACCESS MANAGEMENT
+================================================================================
+
+9.1 ACTIVE DIRECTORY
+---------------------
+On-premises Active Directory (Windows Server 2022):
+- Forest: nexustech.local
+- Domain Controllers: 4 (2x DC-CHI, 1x DC-DAL, 1x DC-CHI secondary)
+- Total user objects: 412 active, 67 service accounts
+- Group Policy Objects: 48 active GPOs
+- Privileged Access: 14 domain admin accounts (target: reduce to 6 by Q2 2026)
+
+9.2 AZURE ACTIVE DIRECTORY / ENTRA ID
+---------------------------------------
+- Tenant: nexustechnologysolutions.onmicrosoft.com
+- Sync method: Azure AD Connect 2.1 (password hash sync + writeback)
+- Conditional Access Policies: 22 active policies
+- MFA: Enforced for all users via Conditional Access (Microsoft Authenticator)
+- Privileged Identity Management (PIM): Enabled for all Azure RBAC roles
+- Identity Protection: Enabled, medium risk policy = MFA challenge,
+  high risk policy = block + notification
+
+9.3 PRIVILEGED ACCESS MANAGEMENT
+----------------------------------
+CyberArk Privileged Access Manager 13.2 is deployed for management of all
+privileged credentials:
+- Managed accounts: 847 (servers, network devices, service accounts)
+- Vault location: DC-CHI (primary), DC-DAL (replica)
+- Session recording: Enabled for all privileged sessions
+- Password rotation: Automated, every 30 days for service accounts,
+  every 90 days for interactive accounts
+
+9.4 CERTIFICATE MANAGEMENT
+---------------------------
+- Internal CA: Active Directory Certificate Services (2-tier hierarchy)
+- Public certificates: Managed via Cert-Manager + Let's Encrypt (dev/staging)
+  and DigiCert OV certificates (production)
+- DigiCert annual spend: $18,400
+- Certificate inventory: 847 tracked certificates (internal + external)
+- Certificates expiring in next 90 days: 12 (all flagged in monitoring)
+
+================================================================================
+10. INFRASTRUCTURE ROADMAP
+================================================================================
+
+10.1 Q1 2026 INITIATIVES
+--------------------------
+1. VMware vSphere 8.0 U3 upgrade (DC-CHI Production cluster)
+   - Planned maintenance window: February 15-16, 2026
+   - Impact: No customer impact expected (rolling upgrade)
+   - Owner: Jake Thompson, Sr. Infrastructure Engineer
+
+2. Kubernetes 1.31 upgrade (k8s-prod cluster)
+   - Target completion: March 2026
+   - Pre-requisite: Application compatibility testing (in progress)
+   - Owner: Maria Santos, Cloud Platform Lead
+
+3. Palo Alto PAN-OS 11.1 upgrade
+   - Planned maintenance window: January 25, 2026 (2am-4am CT)
+   - Impact: 15-minute VPN disruption expected
+   - Owner: Derek Williams, Network Security Engineer
+
+10.2 Q2 2026 INITIATIVES
+--------------------------
+1. DC-CHI compute expansion (4x Dell PowerEdge R750)
+   - Budget: $280,000 (approved)
+   - Delivery lead time: 10-12 weeks
+   - Target installation: May 2026
+
+2. Azure Landing Zone implementation
+   - Migrate from flat subscription model to hub-spoke with policy governance
+   - Estimated timeline: 3 months
+   - External consultant engaged: Contoso Cloud Advisory ($45,000 SOW)
+
+3. Privileged Access reduction initiative
+   - Reduce domain admin count from 14 to 6
+   - Deploy CyberArk Endpoint Privilege Manager for workstations
+   - Owner: Security team (lead: Sandra Kim)
+
+10.3 H2 2026 INITIATIVES
+--------------------------
+1. AI infrastructure evaluation
+   - Evaluate self-hosted LLM deployment on existing H100 GPU nodes
+   - Assess Kubernetes-based inference serving (vLLM or TGI)
+   - RFP process for GPU cluster expansion if justified
+
+2. Storage modernization
+   - Evaluate PowerStore expansion shelf vs cloud-tiering for Tier 2 data
+   - Decision required by Q3 2026 to avoid capacity constraint
+
+3. SASE implementation
+   - Evaluate Palo Alto Prisma SASE or Zscaler for full SASE adoption
+   - Current GlobalProtect VPN to be replaced by Q4 2026
+
+================================================================================
+END OF DOCUMENT
+================================================================================
+Document Owner: Marcus Chen, VP of Infrastructure
+Review Cycle: Quarterly
+Next Review: April 2026
+Questions: infrastructure@nexustech.io
+================================================================================

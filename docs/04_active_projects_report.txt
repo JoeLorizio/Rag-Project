@@ -1,0 +1,378 @@
+NEXUS TECHNOLOGY SOLUTIONS
+ACTIVE PROJECTS AND CUSTOMER ENGAGEMENTS REPORT
+Document Version: Q4 2025 / Q1 2026
+Report Date: January 10, 2026
+Owner: PMO — Patricia Williams, VP Finance and Operations
+Distribution: Executive Team, Account Management, Project Leads
+Classification: Confidential — Internal Use Only
+
+================================================================================
+EXECUTIVE SUMMARY
+================================================================================
+
+As of January 10, 2026, Nexus Technology Solutions has 23 active customer
+projects in delivery, 7 projects in scoping or proposal stage, and 4 internal
+infrastructure projects in progress. Total contracted project backlog is
+$8.4 million. Billable headcount is at 94% utilization, which is above target
+(90%). Four positions are currently open (posted) to support pipeline growth.
+
+Customer attrition for FY2025 was 4.2% (3 customers, all voluntary
+non-renewals). New customer additions in FY2025: 11. Net revenue retention
+for FY2025: 108%.
+
+================================================================================
+SECTION 1: ACTIVE CUSTOMER PROJECTS
+================================================================================
+
+--------------------------------------------------------------------------------
+PROJECT 1: MERIDIAN FINANCIAL GROUP — AZURE LANDING ZONE MIGRATION
+--------------------------------------------------------------------------------
+Customer: Meridian Financial Group
+Account Manager: David Park (david.park@nexustech.io)
+Project Manager: Christine Lee (christine.lee@nexustech.io)
+Technical Lead: Priya Patel (priya.patel@nexustech.io)
+
+Contract Value: $380,000
+Contract Type: Fixed-fee delivery with 12-month managed services follow-on
+Start Date: October 1, 2025
+Target Completion: March 31, 2026
+Current Status: ON TRACK (Green)
+
+Project Overview:
+Meridian Financial Group is a $1.2B AUM regional investment management firm
+headquartered in Chicago. This project involves migrating their 240-VM
+on-premises VMware environment to Azure, including implementation of a
+hub-spoke Landing Zone architecture, Azure Policy governance, and transition
+to Azure Active Directory. Meridian must maintain SOX compliance throughout
+and post-migration.
+
+Milestones:
+[COMPLETE] Phase 1: Discovery and Architecture Design (Oct-Nov 2025)
+[COMPLETE] Phase 2: Landing Zone Build and Identity Migration (Dec 2025)
+[IN PROGRESS] Phase 3: Application Migration Wave 1 — 60 VMs (Jan 2026)
+[UPCOMING] Phase 4: Application Migration Wave 2 — 100 VMs (Feb 2026)
+[UPCOMING] Phase 5: Application Migration Wave 3 — 80 VMs (Mar 2026)
+[UPCOMING] Phase 6: Cutover and Decommission (Mar 2026)
+
+Risks and Issues:
+RISK: Meridian's internal change control process requires 10-business-day
+approval for any production changes. This could compress Wave 2 and 3
+timelines if Wave 1 issues cause delays. Mitigation: Submitted Wave 2
+change requests in parallel with Wave 1 execution.
+
+ISSUE: Azure AD Connect SSO for Meridian's Bloomberg terminal integration
+is not functioning as expected. Priya Patel is working with Microsoft
+support. Expected resolution: January 20, 2026.
+
+Budget Status: $218,000 spent / $380,000 contracted (57% consumed, 50%
+through planned schedule — slightly under budget)
+
+--------------------------------------------------------------------------------
+PROJECT 2: CASCADE HEALTH SYSTEMS — HIPAA COMPLIANCE REMEDIATION
+--------------------------------------------------------------------------------
+Customer: Cascade Health Systems
+Account Manager: Jennifer Wu (jennifer.wu@nexustech.io)
+Project Manager: Marcus Thompson (marcus.thompson@nexustech.io)
+Technical Lead: Sandra Kim (sandra.kim@nexustech.io)
+
+Contract Value: $195,000
+Contract Type: Time and Materials, $215,000 ceiling
+Start Date: September 15, 2025
+Target Completion: February 28, 2026
+Current Status: AT RISK (Yellow)
+
+Project Overview:
+Cascade Health Systems is a regional hospital network operating 6 facilities
+in the Pacific Northwest. Following a HIPAA audit that identified 14 gaps,
+Cascade engaged Nexus to implement remediation across their EHR infrastructure,
+backup systems, and access controls. The engagement includes a final readiness
+assessment and audit preparation.
+
+Milestones:
+[COMPLETE] Phase 1: Gap Assessment and Remediation Plan (Sep-Oct 2025)
+[COMPLETE] Phase 2: Encryption Implementation — PHI at rest (Nov 2025)
+[COMPLETE] Phase 3: MFA Deployment and Access Control Hardening (Dec 2025)
+[IN PROGRESS] Phase 4: Backup Encryption and Retention Policy Implementation
+[AT RISK] Phase 5: Audit Log Centralization and SIEM Integration (Feb 2026)
+[UPCOMING] Phase 6: Final Readiness Assessment (Feb 2026)
+
+Risks and Issues:
+ISSUE (Active): Cascade's Meditech EHR system does not support native audit
+log export in a format compatible with their SIEM (Splunk). Nexus has
+identified a third-party connector (Axient Health Bridge) but customer has
+not approved the additional $28,000 purchase. Waiting on Cascade CIO
+decision since December 18. If not resolved by January 20, Phase 5 will
+slip and February 28 completion date will be missed.
+
+RISK: T&M ceiling of $215,000 — currently at $167,000 consumed with Phase 4
+and Phase 5 remaining. If Phase 5 requires significant rework due to Meditech
+issue, ceiling may be exceeded. PM to present options to customer by
+January 15.
+
+Budget Status: $167,000 / $215,000 ceiling (78% consumed, 70% through
+planned schedule — slightly over budget)
+
+--------------------------------------------------------------------------------
+PROJECT 3: STRATFORD MANUFACTURING — NETWORK REFRESH
+--------------------------------------------------------------------------------
+Customer: Stratford Manufacturing
+Account Manager: Brian Kowalski (brian.kowalski@nexustech.io)
+Project Manager: Tom Yazawa (tom.yazawa@nexustech.io)
+Technical Lead: Derek Williams (derek.williams@nexustech.io)
+
+Contract Value: $520,000 (hardware + professional services)
+Contract Type: Fixed-fee
+Start Date: November 1, 2025
+Target Completion: April 30, 2026
+Current Status: ON TRACK (Green)
+
+Project Overview:
+Stratford Manufacturing operates 4 production facilities in the Midwest.
+This project replaces their end-of-life Cisco 3750 switching infrastructure
+across all facilities with Cisco Catalyst 9300 series, implements SD-WAN
+via Cisco Viptela, and adds Palo Alto NGFWs at each facility edge. Total
+of 240 network devices being replaced.
+
+Hardware breakdown (all ordered and in staging):
+- 48x Cisco Catalyst 9300-48P switches ($168,000)
+- 8x Cisco Catalyst 9500 distribution switches ($64,000)
+- 4x Cisco ISR 4431 routers ($28,000)
+- 4x Palo Alto PA-820 firewalls ($44,000)
+- Hardware subtotal: $304,000
+- Professional services: $216,000
+
+Milestones:
+[COMPLETE] Phase 1: Design and Configuration Build (Nov-Dec 2025)
+[COMPLETE] Phase 2: Lab Validation and Staging (Dec 2025)
+[IN PROGRESS] Phase 3: Chicago Facility Cutover (Jan 2026)
+[UPCOMING] Phase 4: Milwaukee Facility Cutover (Feb 2026)
+[UPCOMING] Phase 5: Indianapolis Facility Cutover (Mar 2026)
+[UPCOMING] Phase 6: Detroit Facility Cutover (Apr 2026)
+
+Milestones:
+Chicago cutover is scheduled for January 18-19, 2026 (weekend maintenance).
+Customer production line cannot have downtime during weekday hours.
+
+Risks and Issues:
+RISK: Chicago facility has 3 undocumented legacy devices discovered during
+site walk that are not in the original scope. Derek Williams assessing
+impact. Change order may be required ($8,000 estimate).
+
+Budget Status: $156,000 spent / $520,000 contracted (30%, on track)
+
+--------------------------------------------------------------------------------
+PROJECT 4: PACIFIC COAST LOGISTICS — MANAGED SOC ONBOARDING
+--------------------------------------------------------------------------------
+Customer: Pacific Coast Logistics
+Account Manager: Jennifer Wu (jennifer.wu@nexustech.io)
+Project Manager: Sandra Kim (sandra.kim@nexustech.io)
+Technical Lead: James Okafor (james.okafor@nexustech.io)
+
+Contract Value: $85,000 onboarding + $24,000/month recurring
+Contract Type: Fixed-fee onboarding, then MSA recurring
+Start Date: December 1, 2025
+Target Completion (onboarding): February 28, 2026
+Current Status: ON TRACK (Green)
+
+Project Overview:
+Pacific Coast Logistics is a freight brokerage firm with 850 employees
+across 12 locations. They engaged Nexus to provide a fully managed Security
+Operations Center (SOC) service after a ransomware incident in Q3 2025.
+The onboarding project involves deploying Elastic SIEM, integrating 28
+log sources, establishing 140 detection rules, and training their internal
+IT team as Tier 1 responders.
+
+Log sources being integrated:
+- Active Directory (domain controllers: 3 DCs)
+- Office 365 / Azure AD (audit logs and sign-in logs)
+- Cisco Meraki firewalls (12 locations)
+- CrowdStrike Falcon EDR (850 endpoints)
+- Mimecast email security
+- Windows Event Logs via Elastic Agent (all servers: 180 systems)
+- Palo Alto Panorama (2 sites with PA-820)
+- AWS CloudTrail
+- VMware vCenter audit logs
+- Web proxy logs (Zscaler)
+
+Milestones:
+[COMPLETE] Phase 1: Elastic SIEM deployment and initial configuration
+[IN PROGRESS] Phase 2: Log source integrations (18/28 complete)
+[UPCOMING] Phase 3: Detection rule library deployment (140 rules)
+[UPCOMING] Phase 4: Runbook development (customer-specific playbooks)
+[UPCOMING] Phase 5: SOC team training and handoff
+
+Monthly recurring service includes:
+- 24/7 alert monitoring by Nexus NOC
+- Tier 2/3 investigation and response
+- Monthly threat intelligence report
+- Quarterly detection rule review
+- Dedicated SOC analyst (6 hours/week for escalations and reporting)
+
+--------------------------------------------------------------------------------
+PROJECT 5: ATLAS INSURANCE PARTNERS — CLOUD DR IMPLEMENTATION
+--------------------------------------------------------------------------------
+Customer: Atlas Insurance Partners
+Account Manager: David Park (david.park@nexustech.io)
+Project Manager: Christine Lee (christine.lee@nexustech.io)
+Technical Lead: Maria Santos (maria.santos@nexustech.io)
+
+Contract Value: $145,000
+Contract Type: Fixed-fee
+Start Date: January 6, 2026
+Target Completion: April 15, 2026
+Current Status: ON TRACK (Green)
+
+Project Overview:
+Atlas Insurance Partners requires a cloud-based DR solution for their
+on-premises VMware environment (80 VMs). Nexus is implementing Azure Site
+Recovery (ASR) for VM replication and Azure Automation for runbook-based
+failover orchestration. RTO target: 2 hours. RPO target: 15 minutes.
+
+This project kicked off January 6, 2026 (one week ago). Discovery phase
+is in progress.
+
+Milestones:
+[IN PROGRESS] Phase 1: Discovery and ASR design (Jan 2026)
+[UPCOMING] Phase 2: ASR deployment and initial replication (Feb 2026)
+[UPCOMING] Phase 3: Failover runbook development (Mar 2026)
+[UPCOMING] Phase 4: DR test (Mar 2026)
+[UPCOMING] Phase 5: Documentation and training (Apr 2026)
+
+--------------------------------------------------------------------------------
+PROJECT 6: RIVERVIEW HEALTHCARE PARTNERS — M365 DEPLOYMENT
+--------------------------------------------------------------------------------
+Customer: Riverview Healthcare Partners
+Account Manager: Jennifer Wu (jennifer.wu@nexustech.io)
+Project Manager: Marcus Thompson (marcus.thompson@nexustech.io)
+Technical Lead: Lauren Mitchell (lauren.mitchell@nexustech.io)
+
+Contract Value: $68,000
+Contract Type: Fixed-fee
+Start Date: January 13, 2026
+Target Completion: March 31, 2026
+Current Status: ON TRACK (Green)
+
+Project Overview:
+Riverview Healthcare Partners (320 employees, 3 outpatient clinic locations)
+is replacing their aging on-premises Exchange 2013 environment with Microsoft
+365 Business Premium. Nexus is managing the migration, including email
+cutover, OneDrive deployment, Teams rollout, and MFA enablement.
+
+Deliverables include:
+- Exchange to Exchange Online migration (320 mailboxes, 4TB of mail data)
+- SharePoint Online deployment and data migration from file shares
+- Microsoft Teams deployment with calling plan integration
+- Azure AD hybrid join for all Windows devices
+- MFA enablement for all users (Authenticator app training provided)
+- 4 hours of end-user training (2 sessions per location)
+
+Note: This is a HIPAA-covered environment. All Microsoft 365 licensing is
+E3 or higher with BAA in place.
+
+--------------------------------------------------------------------------------
+PROJECT 7: INTERNAL — AI INFRASTRUCTURE EVALUATION
+--------------------------------------------------------------------------------
+Customer: Internal (Nexus Technology Solutions)
+Project Sponsor: Rachel Nguyen, VP of Engineering
+Project Manager: Maria Santos (maria.santos@nexustech.io)
+Technical Lead: Jake Thompson (jake.thompson@nexustech.io)
+
+Budget: $45,000 (approved, from operations budget)
+Start Date: December 2025
+Target Completion: March 31, 2026
+Current Status: IN PROGRESS (Green)
+
+Project Overview:
+Nexus is evaluating AI infrastructure options for two internal use cases:
+(1) AI-assisted NOC alert triage and incident summarization, and (2) internal
+knowledge base chatbot using RAG over company documentation.
+
+Evaluation criteria:
+- Self-hosted LLM options (vLLM on H100 GPU nodes already owned)
+- Managed API options (Azure OpenAI, Anthropic Claude, OpenAI)
+- Open source models: Llama 3.1 70B, Mistral Large, Mixtral 8x22B
+- Cost per query, latency, quality, data privacy implications
+
+Current findings:
+- Self-hosted vLLM on H100 nodes is technically viable and provides best
+  data privacy (no customer data leaves premises)
+- Azure OpenAI GPT-4o provides best quality for document summarization
+  but cost at scale is $0.010/1K output tokens
+- Anthropic Claude Sonnet via API scored highest on internal knowledge base
+  Q&A accuracy in blind evaluation (87% accuracy vs 79% for GPT-4o)
+- Local Llama 3.1 70B on H100 is 6x slower than API options but cost is
+  effectively $0 at current scale
+
+Recommendation expected: February 15, 2026
+
+Budget Status: $12,000 spent (discovery, GPU node evaluation, API costs)
+
+--------------------------------------------------------------------------------
+PROJECT 8: INTERNAL — DC-CHI COMPUTE EXPANSION
+--------------------------------------------------------------------------------
+Project Sponsor: Marcus Chen, VP Infrastructure
+Project Manager: Jake Thompson (jake.thompson@nexustech.io)
+Budget: $280,000 (approved Q2 2026)
+Start Date: April 2026 (pending hardware delivery)
+Target Completion: June 2026
+Current Status: PLANNED
+
+4x Dell PowerEdge R750 servers on order. Lead time: 10-12 weeks from
+PO date (PO submitted January 8, 2026). Expected delivery: late March 2026.
+Installation and integration planned for April-May 2026.
+
+================================================================================
+SECTION 2: PIPELINE AND PROPOSALS
+================================================================================
+
+Active proposals in customer evaluation:
+
+1. LIGHTHOUSE SEMICONDUCTOR — DevSecOps Platform Build
+   Estimated Value: $280,000 | Probability: 60% | Expected Decision: Feb 2026
+   Technical Contact: Rachel Nguyen
+   Notes: RFP submitted December 20. Finalist with two other vendors.
+
+2. NORTHERN TRUST BANK — SOC Expansion
+   Estimated Value: $38,000/month recurring | Probability: 45% | Feb 2026
+   Notes: Expanding existing managed services relationship. Strong incumbent
+   advantage but internal IT team is lobbying for in-house expansion.
+
+3. CLEARWATER BIOTECH — Azure Infrastructure Setup
+   Estimated Value: $120,000 | Probability: 70% | Jan 2026
+   Notes: SOW under legal review. Deal essentially closed, awaiting signature.
+
+4. GATEWAY LOGISTICS GROUP — Network Refresh
+   Estimated Value: $340,000 | Probability: 35% | Mar 2026
+   Notes: Early stage. Discovery call completed December 2025.
+
+================================================================================
+SECTION 3: STAFFING AND RESOURCE SUMMARY
+================================================================================
+
+Current billable headcount: 87 engineers on active engagements
+Target billable utilization: 90% | Actual: 94%
+
+Open positions (all posted on LinkedIn and internal job board):
+1. Sr. Cloud Engineer (Azure focus) — Req #2026-014
+2. Network Security Engineer — Req #2026-015
+3. Project Manager (technical PM preferred) — Req #2026-016
+4. Security Analyst (SOC Tier 2) — Req #2026-017
+
+Hiring note: Q1 2026 hiring budget approved for 6 new headcount (4 positions
+above plus 2 additional cloud engineers pending Lighthouse Semiconductor
+win). Recruiters engaged.
+
+Key engineer availability (upcoming):
+- Priya Patel: Meridian project completes March 31; available for new
+  project from April 1
+- Derek Williams: Stratford project completes April 30; available May 1
+- Marcus Thompson: Cascade project completes February 28; available March 1
+  (tentatively assigned to Lighthouse Semiconductor if won)
+
+================================================================================
+END OF DOCUMENT
+================================================================================
+Report prepared by: PMO Office
+Questions: pmo@nexustech.io
+Next quarterly update: April 2026
+================================================================================

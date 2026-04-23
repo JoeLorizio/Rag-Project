@@ -1,0 +1,769 @@
+NEXUS TECHNOLOGY SOLUTIONS
+EMPLOYEE HANDBOOK
+Version: 2025.3
+Effective Date: January 1, 2026
+Last Revised: December 2025
+HR Contact: hr@nexustech.io | +1-312-555-0500
+
+================================================================================
+WELCOME FROM OUR CEO
+================================================================================
+
+Welcome to Nexus Technology Solutions. Whether you are joining us as a new
+employee or reading this handbook as a long-time team member, the information
+contained here reflects who we are, how we work, and what we expect of each
+other.
+
+We are a company built on deep technical expertise, honest client relationships,
+and a culture where engineers are empowered to do their best work. We do not
+succeed by cutting corners, overselling, or treating our customers as
+transactions. We succeed when our customers succeed.
+
+Read this handbook carefully. It is your guide to your employment relationship
+with Nexus, your benefits, your obligations, and the standards we hold each
+other to. If you have questions, our HR team is always available.
+
+Robert Hargrove
+Chief Executive Officer
+Nexus Technology Solutions
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+1. About Nexus Technology Solutions
+2. Employment Policies
+3. Compensation and Pay
+4. Benefits
+5. Time Off and Leave Policies
+6. Work Schedules and Remote Work
+7. Code of Conduct and Professional Standards
+8. Technology and Security Policies
+9. Performance Management
+10. Separation of Employment
+11. Acknowledgment
+
+================================================================================
+1. ABOUT NEXUS TECHNOLOGY SOLUTIONS
+================================================================================
+
+1.1 COMPANY OVERVIEW
+---------------------
+Nexus Technology Solutions was founded in 2009 by Marcus Chen and Robert
+Hargrove with the mission of bringing enterprise-grade managed IT services to
+mid-market companies that historically could not afford them. We are
+headquartered in Chicago, Illinois, with operations in Dallas, Texas and
+New York, New York.
+
+As of January 2026, Nexus employs 340 full-time staff and serves 87 active
+managed service customers across North America. Our annual revenue for fiscal
+year 2025 was $52.4 million.
+
+1.2 CORE VALUES
+----------------
+TECHNICAL EXCELLENCE: We hire people who are great at their craft and we
+invest in keeping them great. We do not pretend to know things we do not know.
+We document what we learn.
+
+CUSTOMER TRUST: Our customers trust us with their most critical systems. That
+trust is earned daily and can be lost in an instant. Every decision we make
+should reinforce, not erode, that trust.
+
+HONEST COMMUNICATION: We tell customers and colleagues the truth, even when
+it is uncomfortable. Problems that are hidden do not get fixed.
+
+CONTINUOUS IMPROVEMENT: Our industry changes constantly. We are expected to
+change with it. Complacency is the fastest path to irrelevance.
+
+INCLUSIVE CULTURE: The best ideas come from diverse teams. We actively work
+to create an environment where everyone belongs and is heard.
+
+1.3 ORGANIZATIONAL STRUCTURE
+-----------------------------
+Executive Team:
+- Robert Hargrove, Chief Executive Officer
+- Sandra Kim, Chief Information Security Officer
+- Marcus Chen, VP of Infrastructure (co-founder)
+- Rachel Nguyen, VP of Engineering
+- Diane Flores, VP of Sales and Marketing
+- Aaron Chang, VP of Customer Success
+- Patricia Williams, VP of Finance and Operations
+
+Departments:
+- Infrastructure (28 staff): Server, storage, networking, cloud operations
+- Engineering (52 staff): Software development, platform engineering, DevOps
+- Security (12 staff): Security operations, compliance, GRC
+- NOC (18 staff): 24/7 monitoring and first-response
+- Account Management (22 staff): Customer success, sales, renewals
+- Finance and Operations (15 staff): Finance, HR, legal, facilities
+- Sales and Marketing (18 staff): Enterprise sales, marketing, pre-sales
+- All other/shared services (175 staff): Customer delivery, project management
+
+================================================================================
+2. EMPLOYMENT POLICIES
+================================================================================
+
+2.1 EQUAL EMPLOYMENT OPPORTUNITY
+----------------------------------
+Nexus Technology Solutions is an equal opportunity employer. We do not
+discriminate in hiring, promotion, compensation, termination, or any other
+employment condition on the basis of race, color, religion, sex, national
+origin, age, disability, veteran status, sexual orientation, gender identity,
+or any other characteristic protected by applicable law.
+
+2.2 AT-WILL EMPLOYMENT
+-----------------------
+Employment at Nexus Technology Solutions is at-will. This means that either
+the employee or the company may terminate the employment relationship at any
+time, with or without cause, and with or without advance notice, subject to
+the terms of any written employment agreement in effect.
+
+Nothing in this handbook creates a contract of employment or guarantees
+employment for any specific period.
+
+2.3 BACKGROUND CHECKS
+----------------------
+All offers of employment are conditional upon successful completion of a
+background check, including criminal history and employment verification.
+Certain roles requiring access to financial data, customer PII, or government
+systems may require additional screening including credit history checks.
+
+2.4 EMPLOYMENT ELIGIBILITY
+---------------------------
+All employees must be legally authorized to work in the United States. I-9
+verification is completed on the first day of employment. Nexus uses E-Verify
+for all new hires.
+
+2.5 PROBATIONARY PERIOD
+------------------------
+All new employees serve a 90-day introductory period. During this period,
+new employees are not eligible for certain benefits (see Section 4). The
+introductory period is a time for the employee and manager to assess fit.
+At-will employment status applies throughout and after the introductory period.
+
+================================================================================
+3. COMPENSATION AND PAY
+================================================================================
+
+3.1 PAY SCHEDULE
+-----------------
+Nexus Technology Solutions pays employees on a bi-weekly schedule, every
+other Friday. The pay period runs Sunday through Saturday. In the event a
+payday falls on a holiday, payroll will be processed on the preceding business
+day.
+
+All employees are paid via direct deposit. Paper checks are not available.
+Employees must provide banking information to HR within their first 3 business
+days. Payroll is processed through ADP Workforce Now.
+
+3.2 SALARY BANDS
+-----------------
+Nexus maintains compensation bands for all roles, reviewed annually in Q4.
+Bands are calibrated against Radford and Mercer technology industry survey
+data, targeting the 60th percentile for base compensation. Total compensation
+(including bonus and benefits) targets the 65th percentile.
+
+Employees may request a copy of their current band from HR. Salary discussions
+between colleagues are permitted and protected by the National Labor Relations
+Act.
+
+3.3 PERFORMANCE BONUSES
+------------------------
+Annual performance bonuses are paid in February based on individual and
+company performance for the prior fiscal year. The bonus structure is:
+
+Individual Contributors: Up to 10% of annual base salary
+Senior / Principal level: Up to 15% of annual base salary
+Management: Up to 20% of annual base salary
+VP level: Up to 30% of annual base salary
+
+Bonus payouts are at the discretion of management and are not guaranteed.
+Employees must be employed on the bonus payment date to be eligible. New hires
+who join after October 1 are not eligible for the current year bonus cycle.
+
+3.4 ON-CALL COMPENSATION
+-------------------------
+Employees participating in on-call rotations receive the following additional
+compensation:
+
+On-call stipend: $200/week for each week on primary on-call rotation
+Incident response compensation: $75/hour for hours worked outside of normal
+business hours (7am-7pm CT M-F) during a declared P1 or P2 incident
+
+On-call stipends are paid monthly with the regular payroll. Incident response
+hours are logged in ServiceNow and approved by the manager before processing.
+
+3.5 OVERTIME
+-------------
+Non-exempt employees are eligible for overtime pay at 1.5x their regular
+hourly rate for hours worked in excess of 40 hours in a workweek. Overtime
+must be pre-approved by the direct manager except in cases of declared P1
+incidents, where overtime is automatically approved.
+
+All engineering and infrastructure positions at Nexus are classified as
+exempt under the FLSA. If you believe your classification may be incorrect,
+contact HR.
+
+================================================================================
+4. BENEFITS
+================================================================================
+
+4.1 HEALTH INSURANCE
+---------------------
+Nexus Technology Solutions offers three health insurance plan options through
+BlueCross BlueShield of Illinois, effective the first of the month following
+30 days of employment.
+
+PLAN 1 — NEXUS PLUS (PPO)
+- Deductible: $500 individual / $1,000 family
+- Out-of-pocket maximum: $3,000 individual / $6,000 family
+- In-network co-pay: $20 primary care / $40 specialist
+- Prescription coverage: $10 generic / $30 brand / $60 specialty
+- Employee monthly premium: $145 (individual) / $310 (employee + spouse)
+  $285 (employee + children) / $420 (family)
+- Nexus contribution: 82% of total premium
+
+PLAN 2 — NEXUS SELECT (HDHP + HSA)
+- Deductible: $1,500 individual / $3,000 family
+- Out-of-pocket maximum: $4,500 individual / $9,000 family
+- HSA contributions: Nexus contributes $800/year (individual) or $1,600/year
+  (family) to your HSA account
+- Employee monthly premium: $65 (individual) / $140 (employee + spouse)
+  $120 (employee + children) / $190 (family)
+- Nexus contribution: 88% of total premium
+- This plan is compatible with a Health Savings Account (HSA)
+
+PLAN 3 — NEXUS CORE (HMO)
+- Deductible: $250 individual / $500 family
+- Out-of-pocket maximum: $2,500 individual / $5,000 family
+- Primary care co-pay: $10
+- Referrals required for specialist visits
+- No out-of-network coverage except emergencies
+- Employee monthly premium: $95 (individual) / $215 (employee + spouse)
+  $185 (employee + children) / $310 (family)
+- Nexus contribution: 85% of total premium
+
+THREE WAYS TO SAVE MONEY WITH YOUR HEALTHCARE BENEFITS:
+
+1. CHOOSE THE HDHP + HSA PLAN (Plan 2) IF YOU ARE GENERALLY HEALTHY
+   The Nexus Select plan has significantly lower premiums than Plan 1.
+   Combined with the $800 annual HSA contribution from Nexus, healthy
+   employees who do not frequently visit doctors often save $1,000 or more
+   annually compared to the PPO. HSA funds roll over year to year and can
+   be invested for long-term healthcare savings.
+
+2. USE IN-NETWORK PROVIDERS
+   All three plans offer significantly reduced costs when using in-network
+   providers. BlueCross BlueShield has one of the largest provider networks
+   in Illinois. Using an out-of-network provider on Plans 1 or 2 can result
+   in 40-60% higher cost-sharing. Use the BCBS provider finder at
+   bcbsil.com/find-a-doctor before scheduling appointments.
+
+3. USE THE EMPLOYEE ASSISTANCE PROGRAM (EAP)
+   The EAP is completely FREE and provides unlimited telephonic mental health
+   counseling, up to 8 free in-person therapy sessions per year, financial
+   counseling, legal consultations, and referrals. Many employees use
+   expensive specialist visits for mental health when the EAP covers the same
+   services at no cost. Call 1-800-555-0199 or visit eap.nexustech.io.
+
+4.2 DENTAL AND VISION
+----------------------
+DENTAL INSURANCE (MetLife):
+- Effective: First of month after 30 days
+- Annual maximum: $2,000 per person
+- Preventive care: 100% covered (in-network)
+- Basic restorative: 80% covered after deductible ($50)
+- Major restorative: 50% covered after deductible
+- Orthodontia: 50% covered, $1,500 lifetime maximum
+- Employee monthly premium: $18 (individual) / $52 (family)
+
+VISION INSURANCE (VSP):
+- Effective: First of month after 30 days
+- Annual eye exam: Covered in full (in-network, once per year)
+- Frames or contacts: $150 allowance annually
+- Employee monthly premium: $8 (individual) / $22 (family)
+
+4.3 RETIREMENT BENEFITS
+------------------------
+401(K) PLAN — FIDELITY INVESTMENTS
+- Eligibility: First of month following 60 days of employment
+- Employee contribution: Up to IRS limit ($23,500 for 2026)
+- Company match: 100% of first 4% of salary contributed
+- Company match vesting: 25% per year, fully vested at 4 years
+- Investment options: 28 Fidelity funds plus self-directed brokerage
+- Auto-enrollment: 6% of salary, employees may opt out or change
+- Profit sharing: Board may approve discretionary contribution (not guaranteed)
+
+To maximize employer match, contribute at least 4% of your salary. Employees
+not contributing at least 4% are leaving company money on the table.
+
+4.4 LIFE AND DISABILITY INSURANCE
+-----------------------------------
+BASIC LIFE INSURANCE: 2x annual salary, Nexus-paid, no employee cost
+VOLUNTARY LIFE: Up to 5x salary, employee-paid, guaranteed issue at hire
+SHORT-TERM DISABILITY: 60% of salary for up to 12 weeks, Nexus-paid
+LONG-TERM DISABILITY: 60% of salary to age 65, Nexus-paid, 90-day waiting
+
+4.5 PROFESSIONAL DEVELOPMENT BENEFITS
+---------------------------------------
+LEARNING AND DEVELOPMENT BUDGET
+All full-time employees receive $2,500 per year for professional development.
+Eligible expenses include:
+- Industry certifications and exam fees
+- Online training platforms (Pluralsight, Linux Foundation, Coursera, etc.)
+- Technical books and reference materials
+- Conference attendance (subject to manager approval)
+- College tuition (reimbursed at 50% up to $5,000/year, grade B or above)
+
+Reimbursement process: Submit receipts through Expensify within 30 days.
+Budget resets January 1. Unused budget does not roll over.
+
+Nexus also maintains corporate licenses for:
+- Pluralsight (all engineers and operations staff)
+- O'Reilly Learning (all technical staff)
+- LinkedIn Learning (all staff)
+
+CERTIFICATION BONUS PROGRAM
+Employees who obtain new industry certifications receive a one-time bonus:
+
+Tier 1 ($250): CompTIA A+, Network+, Security+, Cloud Practitioner (AWS, Azure)
+Tier 2 ($500): RHCSA, VCP, CCNA, MCSA, CKA, AZ-104, Professional certs
+Tier 3 ($1,000): CCIE, CISSP, CISM, AWS/Azure Solutions Architect, OSCP
+Tier 4 ($1,500): AWS/Azure Distinguished Engineer, advanced vendor specializations
+
+Certification bonuses are paid in the next payroll cycle after submission of
+the certificate to HR. One bonus per certification per calendar year.
+
+4.6 ADDITIONAL BENEFITS
+------------------------
+EMPLOYEE ASSISTANCE PROGRAM (EAP)
+Available to all employees and household members from day one:
+- 8 free in-person counseling sessions per year (mental health, counseling)
+- Unlimited telephonic mental health support
+- Financial counseling and planning
+- Legal consultation (1 hour per topic per year)
+- Crisis support line: 24/7
+- Access: 1-800-555-0199 or eap.nexustech.io
+
+COMMUTER BENEFITS
+Pre-tax commuter benefit of up to $315/month for transit and $315/month for
+qualified parking (2026 IRS limits). Administered through WageWorks.
+
+NEXUS WELLNESS PROGRAM
+- $600 annual wellness reimbursement (gym membership, fitness equipment,
+  fitness apps, wellness classes)
+- Submit through Expensify, no approval needed, valid receipts required
+- Resets annually on January 1
+
+EMPLOYEE REFERRAL PROGRAM
+- $2,500 bonus for referring a candidate who is hired into a standard role
+- $4,000 bonus for referring a candidate hired into a senior or above role
+- Paid after referred employee completes 90 days
+- No limit on number of referral bonuses per year
+
+================================================================================
+5. TIME OFF AND LEAVE POLICIES
+================================================================================
+
+5.1 PAID TIME OFF (PTO)
+------------------------
+Nexus uses a combined PTO policy for vacation, personal days, and sick time.
+PTO begins accruing on the first day of employment.
+
+Accrual schedule:
+Years 0-2: 15 days (120 hours) per year / 4.62 hours per pay period
+Years 3-5: 20 days (160 hours) per year / 6.15 hours per pay period
+Years 6+: 25 days (200 hours) per year / 7.69 hours per pay period
+
+Maximum PTO balance: 1.5x annual accrual rate
+(Example: Engineer in year 1 can carry max 180 hours = 22.5 days)
+
+PTO beyond the maximum is forfeited. Employees approaching the cap will be
+notified by HR. Managers are expected to approve PTO requests to help
+employees avoid forfeiture.
+
+On-call engineers: PTO may be taken during on-call weeks, but the engineer
+remains responsible for on-call response. If a P1 occurs during PTO, the
+IC may request secondary on-call to take over at their discretion.
+
+5.2 HOLIDAYS
+-------------
+Nexus observes the following paid holidays in 2026:
+
+New Year's Day — January 1
+Martin Luther King Jr. Day — January 19
+Memorial Day — May 25
+Independence Day — July 4 (observed July 3, Friday)
+Labor Day — September 7
+Thanksgiving Day — November 26
+Day After Thanksgiving — November 27
+Christmas Eve — December 24
+Christmas Day — December 25
+
+If a holiday falls on a weekend, the preceding Friday or following Monday
+is observed. Holiday schedules are published annually in December.
+
+NOC staff working on holidays receive 1.5x pay for hours worked on the
+holiday (regardless of exempt/non-exempt status for all NOC roles).
+
+5.3 SICK LEAVE
+---------------
+Sick leave is included in the PTO accrual above. There is no separate sick
+bucket. Employees are not required to find coverage for sick days, but should
+notify their manager and any on-call schedule administrators as soon as
+possible.
+
+Absences of 3 or more consecutive days may require a physician's note.
+Extended illness may trigger short-term disability benefits (see Section 4.4).
+
+5.4 PARENTAL LEAVE
+-------------------
+BIRTH PARENT LEAVE: 16 weeks fully paid, beginning at birth or adoption
+NON-BIRTH PARENT LEAVE: 8 weeks fully paid, within 12 months of birth or
+adoption placement
+
+Parental leave is separate from and in addition to PTO. It may be taken
+consecutively or intermittently within 12 months of birth/adoption.
+
+Employees must notify HR and their manager at least 30 days in advance when
+possible. Nexus does not require employees to exhaust PTO before using
+parental leave.
+
+5.5 BEREAVEMENT LEAVE
+----------------------
+Employees receive paid bereavement leave as follows:
+- Immediate family (spouse, child, parent, sibling): 5 days paid
+- Extended family (grandparents, in-laws, aunt, uncle): 3 days paid
+- Close friend or colleague: 1 day paid (manager approval)
+Additional unpaid leave may be approved at manager discretion.
+
+5.6 JURY DUTY AND MILITARY LEAVE
+----------------------------------
+Jury Duty: Nexus pays the difference between jury pay and regular salary for
+up to 90 days of jury service.
+
+Military Leave: Nexus complies fully with USERRA. Employees called to active
+military duty receive salary continuation for up to 2 weeks per year. For
+extended military leave, Nexus supplements the difference between military
+pay and civilian salary for up to 6 months.
+
+5.7 UNPAID LEAVE OF ABSENCE
+-----------------------------
+Unpaid leaves of absence may be approved at the company's discretion for
+personal reasons, medical situations not covered by STD/FMLA, or sabbatical.
+Requests should be submitted to HR at least 30 days in advance when possible.
+Benefits continuation during unpaid leave requires COBRA enrollment.
+
+================================================================================
+6. WORK SCHEDULES AND REMOTE WORK
+================================================================================
+
+6.1 STANDARD WORK HOURS
+------------------------
+Core business hours are 9:00am to 5:00pm Central Time, Monday through Friday.
+Most roles have flexibility around these hours provided business needs are met
+and manager approval is obtained.
+
+NOC roles operate on shift schedules. Shift schedules are published monthly
+by the NOC Manager.
+
+6.2 REMOTE WORK POLICY
+------------------------
+HYBRID ELIGIBLE ROLES: Most engineering and administrative roles are hybrid.
+Hybrid employees work from the office a minimum of 2 days per week, typically
+Tuesday and Thursday. Home office days are the employee's choice.
+
+REMOTE ELIGIBLE ROLES: Certain individual contributor roles may be approved
+as fully remote by VP approval. Remote employees located outside the Chicago
+metro area must work within a US time zone compatible with CT business hours
+(no earlier than ET).
+
+ON-SITE REQUIRED ROLES: NOC staff, facilities, and certain infrastructure
+roles requiring data center access are required to be on-site per their
+schedule.
+
+Remote work does not change the employee's on-call obligations. All on-call
+engineers must maintain a reliable internet connection capable of VPN access
+during on-call weeks.
+
+6.3 HOME OFFICE STIPEND
+-------------------------
+Hybrid and fully remote employees receive a one-time home office setup stipend
+of $1,000 upon hire, and a $500 annual refresh stipend. Equipment purchased
+with the stipend belongs to the employee.
+
+Nexus also provides a company-issued laptop (see Section 8) and pays for a
+home internet stipend of $80/month for fully remote employees.
+
+6.4 TRAVEL REQUIREMENTS
+-------------------------
+Some customer-facing roles and senior individual contributors require periodic
+travel to customer sites or company locations. Expected travel frequency is
+noted in the job description at time of hire.
+
+Travel expenses are reimbursed per the Nexus Travel and Expense policy.
+All travel must be booked through the Concur travel portal unless prior
+approval is obtained. Mileage reimbursement rate: IRS standard rate (2026).
+
+================================================================================
+7. CODE OF CONDUCT AND PROFESSIONAL STANDARDS
+================================================================================
+
+7.1 PROFESSIONAL BEHAVIOR
+--------------------------
+All employees are expected to conduct themselves with professionalism,
+integrity, and respect in all interactions with colleagues, customers, vendors,
+and the public. This applies in person, on phone calls, via email, in Slack,
+on social media, and at company events.
+
+7.2 CUSTOMER INTERACTION STANDARDS
+------------------------------------
+When interacting with customers, employees represent the Nexus brand.
+Standards include:
+- Respond to customer communications within 1 business day
+- Never make promises you cannot keep or commitments without manager approval
+- Escalate customer complaints immediately rather than attempting to handle
+  issues outside your authority
+- Do not share confidential information about other customers
+- Never speak negatively about competitors in front of customers
+
+7.3 CONFLICT OF INTEREST
+-------------------------
+Employees must disclose any real or potential conflict of interest to HR
+immediately. Conflicts include but are not limited to:
+- Outside employment or consulting that competes with or involves Nexus
+  customers
+- Financial interest in a vendor, customer, or competitor
+- Personal relationship with a direct report, customer, or vendor
+
+Disclosure does not automatically result in discipline. Undisclosed conflicts
+discovered after the fact may result in termination.
+
+7.4 CONFIDENTIALITY AND NON-DISCLOSURE
+----------------------------------------
+All employees sign a Confidentiality and Non-Disclosure Agreement (CNDA) as
+a condition of employment. Confidential information includes:
+- Customer data, configurations, and contact information
+- Company financial data
+- Proprietary technical processes, code, and documentation
+- Pricing, contracts, and business strategies
+- Personnel information
+
+Confidentiality obligations survive termination of employment.
+
+7.5 HARASSMENT AND DISCRIMINATION
+-----------------------------------
+Nexus Technology Solutions has zero tolerance for harassment, discrimination,
+or retaliation. Harassment includes verbal, physical, and visual conduct that
+creates an intimidating, hostile, or offensive work environment.
+
+Report harassment to:
+- Your direct manager (if the manager is not the subject of the complaint)
+- HR department: hr@nexustech.io or +1-312-555-0500
+- Anonymous hotline: 1-800-555-SAFE (1-800-555-7233)
+
+All reports are treated confidentially to the extent possible. Retaliation
+against employees who report harassment in good faith is prohibited and may
+result in immediate termination.
+
+7.6 SOCIAL MEDIA POLICY
+------------------------
+Employees are free to use social media for personal purposes but must:
+- Never share confidential company or customer information
+- Not claim to speak on behalf of Nexus unless authorized by Marketing
+- Not make defamatory statements about competitors, customers, or colleagues
+- Be aware that public posts can affect Nexus' reputation
+
+The Nexus LinkedIn company page is managed by the Marketing team. Employees
+are encouraged to share approved company content but should not post original
+content on behalf of Nexus without approval.
+
+================================================================================
+8. TECHNOLOGY AND SECURITY POLICIES
+================================================================================
+
+8.1 ACCEPTABLE USE OF COMPANY SYSTEMS
+---------------------------------------
+Company-provided systems (laptops, accounts, infrastructure access) are to be
+used primarily for business purposes. Incidental personal use is permitted
+provided it does not:
+- Interfere with work responsibilities
+- Involve illegal activity
+- Involve downloading or installing unauthorized software
+- Involve accessing inappropriate content
+
+Nexus reserves the right to monitor activity on company-owned systems and
+company networks. Employees should have no expectation of privacy when using
+company systems.
+
+8.2 ENDPOINT SECURITY REQUIREMENTS
+------------------------------------
+All company-issued laptops must have:
+- CrowdStrike Falcon agent installed and running (auto-deployed at provisioning)
+- Company MDM profile enrolled (Jamf for Mac, Intune for Windows)
+- Full disk encryption enabled (FileVault on Mac, BitLocker on Windows)
+- Screen lock set to activate after maximum 5 minutes of inactivity
+- Automatic OS updates enabled
+
+Employees may not disable, tamper with, or attempt to uninstall security
+agents. Violations are treated as a serious security policy violation.
+
+8.3 PASSWORD AND AUTHENTICATION REQUIREMENTS
+---------------------------------------------
+- All Nexus accounts require MFA (Microsoft Authenticator preferred)
+- Passwords must be at least 16 characters for privileged accounts,
+  12 characters for standard accounts
+- Passwords must not be reused within the last 12 cycles
+- Use of a company-approved password manager (1Password) is mandatory for
+  all employees — licenses are provided at no cost
+- Never share passwords with colleagues or record passwords in plain text
+
+8.4 VPN AND REMOTE ACCESS
+--------------------------
+All remote access to company systems must use GlobalProtect VPN. Exceptions
+require CISO (Sandra Kim) approval.
+
+Split-tunneling is disabled on the corporate VPN profile. All traffic from
+company devices is routed through the Palo Alto firewall when VPN is active.
+
+Customer system access (SSH, RDP, vSphere, etc.) must ONLY occur through
+the CyberArk privileged access gateway. Direct connections to customer
+environments are not permitted.
+
+8.5 DATA HANDLING
+------------------
+CUSTOMER DATA CLASSIFICATION:
+- Restricted: Customer PII, financial data, PHI — must be encrypted at rest
+  and in transit, never stored on personal devices, deleted per retention
+  schedules
+- Confidential: Customer configurations, infrastructure details, passwords
+  — encrypted in transit, access limited to need-to-know
+- Internal: General business data — standard protection
+- Public: Marketing materials, public documentation — no restrictions
+
+Data must not be stored on personal devices (phones, personal laptops, USB
+drives). Use company-approved storage only (OneDrive, SharePoint, or
+company-approved cloud services).
+
+8.6 SECURITY INCIDENT REPORTING
+---------------------------------
+Report security incidents IMMEDIATELY to the Security Operations Center:
+- Email: soc@nexustech.io
+- Phone: +1-312-555-0600 (24/7)
+- Slack: #security-incidents
+
+Examples of security incidents to report:
+- Lost or stolen device
+- Phishing email clicked
+- Suspicious login notification
+- Unknown software installed on your device
+- Exposure of customer data
+
+Do NOT attempt to investigate security incidents yourself. Notify the SOC
+and follow their instructions.
+
+================================================================================
+9. PERFORMANCE MANAGEMENT
+================================================================================
+
+9.1 PERFORMANCE REVIEW CYCLE
+------------------------------
+Nexus uses a twice-annual performance review cycle:
+- Mid-year review: July (feedback and goal check-in, no rating)
+- Annual review: December (full rating, compensation adjustment, bonus)
+
+Reviews are completed in Workday. All employees and managers are required to
+complete self-assessments before manager assessments are submitted.
+
+9.2 PERFORMANCE RATINGS
+------------------------
+5 — Exceptional: Consistently exceeds all expectations. Clear top performer.
+4 — Exceeds Expectations: Regularly goes above and beyond in most areas.
+3 — Meets Expectations: Fully competent, reliably meets all commitments.
+2 — Development Needed: Partially meets expectations; improvement required.
+1 — Unsatisfactory: Consistently fails to meet basic expectations.
+
+Distribution target: approximately 15% at 5, 25% at 4, 50% at 3, 10% at 2/1.
+Distribution targets are guidelines, not quotas.
+
+9.3 PERFORMANCE IMPROVEMENT PLANS
+-----------------------------------
+Employees receiving a rating of 2 may be placed on a Performance Improvement
+Plan (PIP) by their manager with HR involvement. PIPs are 60-90 days in
+duration and include:
+- Specific, measurable improvement goals
+- Defined support and resources from the manager
+- Clear consequences if goals are not met
+
+PIPs are intended as genuine improvement tools, not as a formality before
+termination. Employees who successfully complete a PIP are removed from
+probation and may be eligible for normal performance ratings.
+
+================================================================================
+10. SEPARATION OF EMPLOYMENT
+================================================================================
+
+10.1 VOLUNTARY RESIGNATION
+---------------------------
+Employees are requested to provide:
+- Individual contributors and managers: 2 weeks written notice
+- Senior managers and VP level: 4 weeks written notice
+
+While notice is appreciated, at-will employment means neither party is
+legally required to provide notice. Nexus may accept a resignation effective
+immediately at its discretion.
+
+10.2 INVOLUNTARY TERMINATION
+------------------------------
+Employees may be terminated for cause (policy violations, performance, conduct)
+or without cause (layoff, restructuring). Terminated employees will receive
+their final paycheck on the next regular payday or earlier as required by law.
+
+Nexus does not offer severance as a standard practice. Severance may be offered
+at the company's discretion in connection with layoffs or mutually agreed
+separations, and would be documented in a separate separation agreement.
+
+10.3 OFFBOARDING PROCESS
+-------------------------
+On or before the last day of employment, employees must:
+- Return all company property: laptop, badge, peripherals, documents
+- Provide system access and credential information if requested
+- Complete exit interview with HR (voluntary but encouraged)
+- Ensure work is documented and handed off to manager or designated colleague
+
+IT will disable all access immediately upon separation. CyberArk will rotate
+all managed credentials touched by the departing employee within 24 hours.
+
+10.4 COBRA AND BENEFITS CONTINUATION
+--------------------------------------
+Health, dental, and vision benefits end on the last day of the month in which
+employment ends. Employees are eligible for COBRA continuation coverage.
+COBRA election information is mailed within 14 days of separation.
+
+================================================================================
+11. ACKNOWLEDGMENT
+================================================================================
+
+By accepting employment with Nexus Technology Solutions, you acknowledge that:
+
+1. You have received, read, and understood this Employee Handbook
+2. You understand that this handbook does not constitute a contract of
+   employment and may be updated at any time with or without notice
+3. You agree to comply with all policies, procedures, and standards outlined
+   herein
+4. You understand that violation of these policies may result in disciplinary
+   action up to and including termination
+
+A signed acknowledgment form is maintained in your personnel file. Please
+contact HR at hr@nexustech.io with any questions about this handbook.
+
+================================================================================
+END OF DOCUMENT
+================================================================================
+Human Resources
+Nexus Technology Solutions
+hr@nexustech.io | +1-312-555-0500
+350 N Orleans St, Suite 1200, Chicago, IL 60654
+
+This document is subject to change. The most current version is always
+available on the Nexus intranet at intranet.nexustech.io/hr/handbook.
+================================================================================
